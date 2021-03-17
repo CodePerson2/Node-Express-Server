@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/02181700fb.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+    <!-- favicon.ico -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Mattias Stroman</title>
+  </head>
+  <body onload="pageLoad()">
+    <!-- navbar -->
+    <nav class="navbar">
+      <a href="" class="navbar__logo">
+        <img src="image/logo-o.png" />
+      </a>
+
+      <div onclick="bars_to_x()">
+        <div class="navbar__bars" id="navbar__bars">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="navbar__x" id="navbar__x">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="navbar__menu">
+        <a href="/contact/contact.html" class="navbar__menu--links" id="button"
+          >Contact Me</a
+        >
+      </div>
+    </nav>
+    <div class="contact__bar" id="contact__bar">
+      <div class="navbar__menu navbar__menu__mobile">
+        <a href="/contact/contact.html" class="navbar__menu--links" id="button"
+          >Contact Me</a
+        >
+      </div>
+    </div>
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero container">
+        <div class="hero__container--left">
+          <h1>Full Stack Software Developer</h1>
+          <p>Solving complex problems with simple code.</p>
+        </div>
+        <div class="hero__container--icon">
+          <img class="hero__container--profile" src="image/profile-icon.png" />
+        </div>
+        <div class="hero__container--icon">
+          <img
+            class="hero__container--image"
+            src="image/website_fullStack_icon.png"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="info">
+      <h1>Hello, I'm Mattias :)</h1>
+      <div class="info__para">
+        <p>
+          I am a fourth-year student studying Computing Science at Simon Fraser
+          University. I have worked on numerous personal projects that have
+          bettered my abilities to develop functional and beautiful code. I
+          enjoy developing both front-end and back-end applications. Developing
+          Web Apps as a team at SFU has shown me the productivity that group
+          work can garner. I'm hungry to learn, ready for a challenge, and
+          motivated to better the world around me.
+        </p>
+      </div>
+    </div>
+    <div class="skill">
+      <div class="skill-sheet">
+        <div class="skill-sheet__container">
+          <div class="skill-sheet__container__i">
+            <img src="image/dev-icons2.png" />
+          </div>
+          <h1>Front-end Development</h1>
+          <p>
+            I love designing beautiful Web Apps that are easy to navigate and
+            fun to use.
+          </p>
+          <h2>My Languages</h2>
+          <h3 class="skill-sheet__container__lang">HTML, CSS, Sass</h3>
+          <h2>My Frameworks</h2>
+          <h3 class="skill-sheet__container__lang">React</h3>
+        </div>
+        <div class="skill-sheet__container">
+          <div class="skill-sheet__container__i">
+            <img src="image/back-end.png" />
+          </div>
+          <h1>Back-end Development</h1>
+          <p>
+            I write functional code that reads itself. I try to find the
+            simplest way to solve a problem.
+          </p>
+          <h2>My Languages</h2>
+          <h3 class="skill-sheet__container__lang">
+            Javascript, Typescript, PHP, Python
+          </h3>
+          <h2>My Frameworks</h2>
+          <h3 class="skill-sheet__container__lang">Express, Node.js</h3>
+        </div>
+        <div class="skill-sheet__container">
+          <div class="skill-sheet__container__i">
+            <img src="image/tool-icon.png" />
+          </div>
+          <h1>Tools I Use</h1>
+          <p>Using the proper tools makes the job that much easier.</p>
+          <h2>Tools</h2>
+          <h3 class="skill-sheet__container__lang">
+            Github, Bitbucket, VSCode, CodePen
+          </h3>
+          <h2>Messaging</h2>
+          <h3 class="skill-sheet__container__lang">Discord, Slack</h3>
+        </div>
+      </div>
+    </div>
+    <div class="projects">
+      <div class="projects__i">
+        <img src="image/project-icon.png" />
+      </div>
+      <h1>My Recent Projects</h1>
+      <div class="projects__bubbles">
+        <div class="project">
+          <div class="card" id="card3">
+            <div class="project_info" id="info3">
+              <h2 class="project_info_header">Messenger</h2>
+              <h3 class="project_info_para">Built Using:</h3>
+              <h3 class="project_info_para">React</h3>
+              <h3 class="project_info_para">SASS</h3>
+              <h3 class="project_info_para">Express - Node.js</h3>
+              <h3 class="project_info_para">SQLite</h3>
+              <button onclick="launchMessenger()" class="project_info_button">
+                Open App
+              </button>
+            </div>
+          </div>
+          <div class="blur" id="blur3"></div>
+        </div>
+        <div class="project">
+          <div class="card" id="card">
+            <div class="project_info" id="info">
+              <h2 class="project_info_header">Banana Tag</h2>
+              <h3 class="project_info_para">Built Using:</h3>
+              <h3 class="project_info_para">Express - Node.js</h3>
+              <h3 class="project_info_para">SASS</h3>
+              <h3 class="project_info_para">Socket.io</h3>
+              <h3 class="project_info_para">Phaser.io</h3>
+              <button onclick="launchMonkeyGame()" class="project_info_button">
+                Launch Game
+              </button>
+            </div>
+          </div>
+          <div class="blur" id="blur"></div>
+        </div>
+
+        <div class="project">
+          <div class="card" id="card2">
+            <div class="project_info" id="info2">
+              <h2 class="project_info_header">Pixel Plane</h2>
+              <h3 class="project_info_para">Built Using:</h3>
+              <h3 class="project_info_para">Unity Game Engine</h3>
+              <h3 class="project_info_para">C#</h3>
+              <h3 class="project_info_para">VSCode</h3>
+              <button onclick="linkPixelGame()" class="project_info_button">
+                Link to App
+              </button>
+            </div>
+          </div>
+          <div class="blur" id="blur2"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <a href="" class="footer__logo">
+        <img src="image/logo-w.png" />
+      </a>
+      <h1>Break, Fix, and Repeat.</h1>
+
+      <h3>Made with &#9825; by Mattias Stroman<br />&#169; 2019-2021</h3>
+    </footer>
+    <script src="index.js"></script>
+    <script src="script/project.js"></script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+@import 'colors';
+@import 'media-queries';
+
+%align-center{
+    display: flex;
+    align-items: center;
+}
+
+.navbar{
+    background: $light;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    //padding: 0.5rem calc((100vw -1200px) /2);
+    z-index: 10;
+    position: relative;
+
+    @include no-select;
+
+    &__logo{
+        color: $orangeMain;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 3rem;
+        margin-left: 65px;
+        margin-top: 15px;
+        @extend %align-center;
+
+        img{
+            max-width: 90px;
+            margin: auto;
+        }
+
+        @include tablet{
+            font-size: 2.3rem;
+            margin-left: 20px;
+            margin-top: 0px;
+
+            img{
+                max-width: 70px;
+            }
+        }
+    }
+    &__bars{
+        opacity: 0;
+        cursor: pointer;
+        
+
+        @include tablet {
+            color: $dark;
+            opacity: 1;
+            position: absolute;
+            top:22px;
+            right: 40px;
+            font-size: 2rem;
+            transition: all 0.1s ease;
+        }
+    }
+    &__x{
+        opacity: 0;
+        cursor: pointer;
+
+        @include tablet {
+            color: $dark;
+            opacity: 0;
+            position: absolute;
+            top:22px;
+            right: 40px;
+            font-size: 2rem;
+            transition: all 0.1s ease;
+        }
+    }
+
+    &__menu{
+        @extend %align-center;
+        list-style: none;
+        text-align: center;
+        margin-right: 24px;
+        
+
+        @include tablet{
+            display: none;
+        }
+
+        &__mobile{
+            justify-content: center;
+            display: flex;
+            margin-right: 0px;
+        }
+
+        &--links{
+            color: $dark;
+            @extend %align-center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+
+            &:hover{
+                color: $orangeMain;
+                transition: all 0.3s ease;
+            }
+        }
+
+        #button {
+            padding: 12px 24px;
+            border: none;
+            border-color: $orangeMain;
+            border-style: solid;
+            outline: none;
+            border-radius: 30px;
+            height: 45px;
+            background: $light;
+            margin-right: 40px;
+            margin-top: 25px;
+            color: $orangeMain;
+            font-weight: 400;
+
+            &:hover{
+                background-color: $orangeMain;
+                color: $light;
+                transition: all 0.3s ease;
+            }
+
+            @include tablet{
+                margin-right: 0px;
+                margin-top: 0px;
+            }
+        }
+    }
+}
+
+.contact__bar{
+    display: none;
+}

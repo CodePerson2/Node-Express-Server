@@ -1,0 +1,128 @@
+.project {
+  position: relative;
+  margin-top: 40px;
+}
+
+.card {
+  position: relative;
+  border-radius: 16px;
+  margin: 0 auto;
+  width: 500px;
+  max-width: 90%;
+  height: 500px;
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+  background-image: url(../image/bananaInGame.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.project_info {
+  opacity: 0;
+  border-radius: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #ff763b67;
+  width: 510px;
+  max-width: 100%;
+  height: 500px;
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+  z-index: 5;
+}
+
+.project_info_header {
+  position: relative;
+  color: white;
+  margin: 0 auto;
+  font-size: 3.3rem;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-shadow: -1px 1px 0 #ddd, -2px 2px 0 #c8c8c8, -3px 3px 0 #ccc, -4px 4px 0 #b8b8b8, -4px 4px 0 #bbb, 0px 1px 1px rgba(0, 0, 0, 0.4), 0px 2px 2px rgba(0, 0, 0, 0.3), -1px 3px 3px rgba(0, 0, 0, 0.2), -1px 5px 5px rgba(0, 0, 0, 0.1), -2px 8px 8px rgba(0, 0, 0, 0.1), -2px 13px 13px rgba(0, 0, 0, 0.1);
+}
+
+.project_info_para {
+  position: relative;
+  color: white;
+  margin: 10px auto;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.project_info_button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  margin-top: 40px;
+  background-color: white;
+  width: 200px;
+  padding: 10px 0px;
+  display: block;
+  margin: 0px auto;
+  color: #ff763b;
+  margin: auto auto;
+  margin-top: 40px;
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: 0.5s ease-out;
+  transition: 0.5s ease-out;
+}
+
+.project_info_button:hover {
+  -webkit-transition: 0.5s ease-out;
+  transition: 0.5s ease-out;
+  background-color: rgba(255, 255, 255, 0.37);
+  color: white;
+}
+
+.blur {
+  border-radius: 16px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
+  background-image: url(../image/bananaInGame.png);
+  background-position: center;
+  background-size: cover;
+  width: 500px;
+  max-width: 90%;
+  height: 500px;
+  opacity: 0;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+  z-index: 2;
+}
+
+#card2 {
+  background-image: url(../image/pixelplane.jpg);
+}
+
+#blur2 {
+  background-image: url(../image/pixelplane.jpg);
+}
+
+#card3 {
+  background-image: url(../image/pixelplane.jpg);
+}
+
+#blur3 {
+  background-image: url(../image/pixelplane.jpg);
+}
+/*# sourceMappingURL=project.css.map */

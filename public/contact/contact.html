@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://kit.fontawesome.com/02181700fb.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style/contact_style.css"/>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+	<title>Mattias | Contact</title>
+</head>
+<body onload="pageLoad()">
+    
+	<!-- navbar -->
+	<nav class="navbar">
+        <a href="../home.html" class="navbar__logo">
+            <img src="../../image/logo-o.png">
+        </a>
+
+        <div class="navbar__notif" id="notif"></div>
+        
+        <div onclick="bars_to_x()">
+            <div class="navbar__bars" id="navbar__bars">
+                <i class="fas fa-bars" ></i>
+            </div>
+
+            <div class="navbar__x" id="navbar__x">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+		<div class="navbar__menu">
+			<a href="/" class="navbar__menu--links" id="button">Home</a>
+		</div>
+    </nav>
+
+    <div class="contact__bar" id="contact__bar">
+        <div class="navbar__menu navbar__menu__mobile" >
+			<a href="/" class="navbar__menu--links" id="button">Home</a>
+		</div>
+    </div>
+
+    <div class="contact-header">
+        <h1>Let's get in touch.</h1>
+    </div>
+    <div  class="contact_form">
+
+        <div class="contact_form_cont_s">
+            <label for="name" class="name">Name</label>
+            <input class="contact_form_cont_s_inp" type="text" id="name" name="name">
+        </div>
+        
+        <div class="contact_form_cont_s">
+            <label for="email" class="email">Email</label>
+            <input class="contact_form_cont_s_inp" type="text" id="email" name="email">
+        </div>
+
+        <div class="contact_form_cont_l">
+            <label for="message" class="message">Message</label>
+            <textarea class="contact_form_cont_l_message" rows="5" id="message" name="message"></textarea>
+
+        </div>
+        <div class="contact_form_cont_l">
+            <button id="submit_button" class="submit">Submit</button>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <a href="../home.html" class="footer__logo">
+            <img src="../../image/logo-w.png">
+        </a>
+        <h1>Break, Fix, and Repeat.</h1>
+
+        <h3>Made with &#9825 by Mattias Stroman<br>&#169 2019-2021</h3>
+    </footer>
+    <script src="../index.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

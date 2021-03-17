@@ -1,0 +1,98 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mattias | Banana Tag</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <link rel="stylesheet" href="./style/monkey.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;500&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="gameStart" id="gameStart"></div>
+
+    <div class="main" id="main">    
+        <div class="navbar__notif" id="notif"></div>
+        <div class="main_title">
+            <h1 class="">Banana Tag</h1>
+        </div>
+        <div class="main_banana">
+            <img src="../Monkey/assets/banana.png" alt="">
+        </div>
+        
+        <div class="main_h" id="join">
+            <div class="main_h_colorTitle">Pick a Color!</div>
+            <div class="main_h_color">
+                <div class="main_h_color_each" id="black"></div>
+                <div class="main_h_color_each" id="brown"></div>
+                <div class="main_h_color_each" id="blue"></div>
+                <div class="main_h_color_each" id="green"></div>
+                <div class="main_h_color_each" id="yellow"></div>
+                <div class="main_h_color_each" id="red"></div>
+                <div class="main_h_color_each" id="pink"></div>
+                <div class="main_h_color_each" id="white"></div>
+                <div class="main_h_color_each" id="purple"></div>
+                <div class="main_h_color_each" id="orange"></div>
+            </div>
+            <div class="main_h_input">
+                <input type="text" id="name" placeholder="name" maxlength="10">
+            </div>
+            <div class="main_h_random">
+                <button id="game">Join Random Game</button>
+            </div>
+        </div>
+        <div class="main_l" id="lobby">
+            <h1>Lobby</h1>
+            <div class="main_l_list" id="list">
+                
+            </div>
+            <button id="ready">Ready</button>
+            <button id="leaveGame">Leave Lobby</button>
+        </div>
+        <div class="main_how">
+            <div class="main_how_title">How To Play</div>
+            <div class="main_how_para"><b>Controls for desktop:</b> "A" to move left, "D" to move right, "SPACE" to jump and double jump, Mouse left click to throw banana.<br><br>
+            <b>Controls for Mobile:</b> Joystick to move left and right, Jump Button to jump and double jump, Throw button to throw banana<br><br>
+            <b>Game begins after atleast 2 players are in lobby and everyone is "Ready"</b><br><br>
+            <b>Objective of game</b> is to have the banana for the shortest amount of time.<br><br>
+            Once any player gets a score of 60 the game ends.</div>
+        </div>
+    </div>
+    <div class="score" id="score">
+        <hi class="score_title">Score</hi>
+        <div class="score_board" id="scoreBoard">
+
+        </div>
+    </div>
+    <div class="results" id="results">
+
+        <div class="results_title">
+            <h1>Results</h1>
+        </div>
+        <div class="results_board" id="resultsBoard">
+         
+        </div>
+        <button id="home">Home</button>
+    </div>
+
+    <div class="joy" id="joy" style="width: 128px">
+        <img src="assets/joystick-base.png"/>
+        <div id="stick" style="position: absolute; left:32px; top:32px;">
+            <img src="assets/joystick-red.png"/>    
+        </div>
+    </div>
+
+    <div class="gameButtons" id="gameButtons">
+        <button id="throw">Throw</button>
+        <button id="jump">Jump</button>
+    </div>
+
+
+    <script type="module" src="socket.js"></script>
+    <!-- <script type="module" src="additional.js"></script> -->
+    <!-- <script src="socket.js"></script> -->
+
+</body>
+</html>

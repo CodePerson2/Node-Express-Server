@@ -1,0 +1,376 @@
+@import 'navbar';
+@import 'scrollbar';
+@import 'project';
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	font-family: 'Exo', sans-serif;
+	font-weight: 300;
+	@include no-select;
+}
+
+body{
+	height: 100%;
+	@include custom-scroll-bar;
+}
+
+.contact_bar{
+	text-align: center;
+}
+
+// Hero Section CSS
+.hero{
+	background-color: $light;
+	padding-top: 35px;
+
+	@include tablet{
+		padding-top: 5px;
+	}
+
+	&__container{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		justify-items: center;
+		margin: 0 auto;
+		height: 90vh;
+		z-index: 1;
+		width: 100%;
+		max-width: 1200px;
+		padding-right: 24px;
+		padding-left: 24px;
+		
+
+		@include tablet{
+			grid-template-columns: 1fr;
+			height: 100%;
+		}
+	
+		&--left{
+			width: 100%;
+			line-height: 1.2;
+			padding: 1rem;
+			
+
+			@include mobile{
+				line-height: 1.5;
+			}
+		}
+		&--left h1 {
+			font-size: 3rem;
+			color: $dark;
+			text-align: center;
+			font-weight: 500;
+			max-width: 90%;
+			margin: auto;
+			
+			@include tablet{
+				font-size: 2.3rem;
+			}
+
+			@include mobile{
+				font-size: 1.5rem;
+			}
+		}
+
+		&--left h2 {
+			font-size: 4rem;
+			color: $dark;
+
+			@include mobile{
+				font-size: 2rem;
+			}
+		}
+
+		&--left p {
+			font-size: 1.5rem;
+			color: $dark;
+			margin: auto;
+			margin-top: 1rem;
+			text-align: center;
+			max-width: 50%;
+			
+
+			@include tablet{
+				font-size: 1.15rem;
+				max-width: 80%;
+			}
+
+			@include mobile{
+				font-size: 0.9rem;
+				max-width: 90%;
+			}
+		}
+
+		&--btn {
+			font-size: 1rem;
+			background-color: $orangeMain;
+			padding: 14px 32px;
+			border: none;
+			border-radius: 4px;
+			color: $light;
+			margin-top: 2rem;
+			cursor: pointer;
+			position: relative;
+			transition: all 0.3s;
+			outline: none;
+		}
+
+		&--btn a{
+			position: relative;
+			z-index: 2;
+			color: $light;
+			text-decoration: none;
+		}
+
+		&--btn:after{
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 100%;
+			background: $orangeRed;
+			transition: all 0.3s;
+			border-radius: 4px;
+		}
+
+		&--btn:hover:after{
+			width: 100%;
+		}
+
+		&--profile{
+			max-width: 300px;
+			text-align: center;
+			margin: auto;
+			padding: 0px 15px;
+			padding-top: 20px;
+
+		}
+		&--icon{
+			max-width: 700px;
+			text-align: center;
+			margin: auto;
+			padding: 0px 15px;
+
+		}
+		&--image{
+			width: 100%;
+			margin: auto;
+			margin-top: 30px;
+			margin-bottom: -7px;
+		}
+
+		&--img{
+			width: 100%;
+			margin: auto;
+		}
+	}
+}
+
+.info{
+	background-color: $orangeMain;
+	width: 100%;
+	border-radius: 10px;
+	h1{
+		color:$light;
+		text-align: center;
+		padding-top: 140px;
+		padding-bottom: 27px;
+		font-size: 2rem;
+		font-weight: 500;
+	}
+	p{
+		color: $light;
+		text-align: center;
+		padding-bottom: 250px;
+		font-size: 1.3rem;
+		max-width: 50%;
+		margin: auto;
+		text-justify: inter-word;
+		text-align: justify;
+
+		@include tablet{
+			max-width: 75%;
+		}
+
+		@include mobile{
+			max-width: 90%;
+		}
+
+	}
+}
+
+.skill{
+	position: relative;
+	bottom: 8rem;
+	height: 100%;
+	z-index: 2;
+
+	&-sheet{
+		width: 95%;
+		margin: auto;
+		text-align: center;
+		height: 100%;
+
+		&__container{
+			min-height: 100%; 
+			display: inline-block;
+			background-color: $light;
+			max-width: 307px;
+			padding: 10px 3px;
+			border-radius: 10px;
+			text-align: center;
+			vertical-align: top;
+			box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+			padding-bottom: 25px;
+
+			@include smallComputer{
+				max-width: 235px; 
+			}
+
+			@include tablet{
+				max-width: 385px;
+			}
+			
+			&__i{
+				width: 100%;
+				margin: 25px 0px;
+				img{
+					max-width: 60px;
+					margin: auto;
+				}
+			}
+			&__lang{
+				margin: auto;
+				max-width: 85%;
+				padding-top: 15px;
+				font-size: 1rem;
+
+			}
+			h1{
+				display: inline-flex;
+				font-size: 1.2rem;
+				font-weight: 500;
+			}
+			p{
+				padding-top: 15px;
+				text-justify: inter-word;
+				text-align: justify;
+				max-width: 85%;
+				margin: auto;
+			}
+			h2{
+				padding-top: 15px;
+				text-align: center;
+				max-width: 85%;
+				margin: auto;
+				color: $orangeMain;
+				font-size: 1.05rem;
+				font-weight: 400;
+			}
+			
+		}
+	}
+}
+.projects{
+	padding-top: 0rem;
+	padding-bottom: 8rem;
+	border-radius: 10px;
+	z-index: 1;
+	position: relative;
+	bottom: 3rem;
+	h1{
+		text-align: center;
+		color: $dark;
+		margin: auto;
+		font-weight: 500;
+		font-size: 2rem;
+
+	}
+	&__i{
+		width: 100%;
+		margin: 25px 0px;
+		img{
+			display: block;
+			max-width: 120px;
+			margin: auto;
+			text-align: center;
+		}
+	}
+	&__bubbles{
+		margin-top: 30px;
+		margin-bottom: 50px;
+		&__p{
+			position: relative;
+			cursor: pointer;
+			width: 200px;
+			height: 200px;
+			margin: auto;
+			display: inline-block;
+			border-radius: 50%;
+			border-width: 3px;
+			border-color: $orangeMain;
+			border-style: solid;
+			transition: all 0.3s ease;
+			h1{
+				font-size: 1.5rem;
+				font-weight: 300;
+				padding: 40px 40px;
+			}
+		}
+		&__p:hover{
+			background-color: $orangeMain;
+
+			h1{
+				color: $light;
+			}
+		}
+		&__l{
+			margin-left: 33%;
+		}
+		&__r{
+			float: right;
+			margin-right: 33%;
+		}
+	}
+}
+.footer{
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	background-color: $orangeMain;
+	width: 100%;
+	text-align: center;
+	padding-top: 50px;
+	&__logo{
+        color: $light;
+        cursor: pointer;
+        text-decoration: none;
+		font-size: 3rem;
+		margin: auto;
+		margin-top: 25px;
+        //@extend %align-center;
+
+		img{
+            max-width: 90px;
+            margin: auto;
+		}
+		
+        @include tablet{
+            font-size: 2.3rem;
+        }
+	}
+	h1{
+		margin-top: 20px;
+		opacity: 70%;
+		color: $light;
+		font-size: 1.3rem;
+	}
+	h3{
+		margin-top: 10px;
+		color: $light;
+		font-size: 1rem;
+		padding-bottom: 40px;
+	}
+}
