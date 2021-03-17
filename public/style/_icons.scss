@@ -1,0 +1,17 @@
+@import 'colors';
+
+.icons{
+    position: fixed;
+    right: 5px;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translate(0, -50%);
+    z-index: 15;
+
+    img{
+        width: 30px;
+        height: 30px;
+        margin-bottom: 15px;
+    }
+}
