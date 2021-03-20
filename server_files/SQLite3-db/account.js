@@ -1,4 +1,8 @@
 const AppDAO = require("./dao");
+const login = require("./login");
+const Promise = require("bluebird");
+
+const tokenMax = 20;
 
 function createGroup(usernames) {
   const dao = new AppDAO("./database.sqlite3");
@@ -17,19 +21,60 @@ function createGroup(usernames) {
 
 function sendMessage(token, userid, groupid, message) {
   const dao = new AppDAO("./database.sqlite3");
+  checkToken(token, userid, dao).then((tok) => {
+    if (tok) {
+      checkUserInGroup(dao, userid, groupid).then((val) => {
+        if (val) {
+          dao.run(
+            "INSERT INTO message (userid, groupid, message) VALUES (?, ?, ?)",
+            [userid, groupid, message]
+          );
+        }
+      });
+    }
+  });
+}
 
-  checkToken(token, userid, dao);
+function checkUserInGroup(dao, userid, groupid) {
+  return new Promise((res, rej) => {
+    dao
+      .get("SELECT userID FROM userChat WHERE userID = ? AND groupID = ?", [
+        userid,
+        groupid,
+      ])
+      .then((row) => {
+        if (row === undefined) {
+          console.log("User Not In group");
+          //tell user they are not in group discussed
+          rej(false);
+        } else {
+          console.log("user and group found");
+          res(true);
+        }
+      });
+  });
 }
 
 function checkToken(token, userid, dao) {
-  dao
-    .get(
-      "select tokenTime, CURRENT_TIMESTAMP from login where userID = ? and token = ?",
-      [userid, token]
-    )
-    .then((val) => {
-      console.log(val);
-    });
+  return new Promise((res, rej) => {
+    dao
+      .get(
+        "select strftime('%s','now') - strftime('%s', tokenTime) as time from login where userID = ? and token = ?",
+        [userid, token]
+      )
+      .then((val) => {
+        if(val === undefined){
+          //tell user token is corrupt login again
+        }
+        else if (val.time / 60 > tokenMax) {
+          //Tell user to login again
+          rej(false);
+        } else {
+          login.refreshTokenDate(dao, userid);
+          res(true);
+        }
+      });
+  });
 }
 
 exports.createGroup = createGroup;

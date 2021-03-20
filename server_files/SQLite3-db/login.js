@@ -19,25 +19,27 @@ function loginAccount(username, password) {
   const dao = new AppDAO("./database.sqlite3");
 
   dao.get(`select * from login where userName = ?`, [username]).then((val) => {
-    if(val === undefined) console.log('no user found')
-    else if(passHash.verify(password, val.password)) {
-      refreshToken(dao, val.userID)
+    if (val === undefined) console.log("no user found");
+    else if (passHash.verify(password, val.password)) {
+      refreshToken(dao, val.userID);
     }
   });
 }
 
 function refreshTokenDate(dao, id) {
-  dao.run(`UPDATE login SET tokenTime = CURRENT_TIMESTAMP WHERE userID = ?`,
-    [id]
-  )
+  dao.run(`UPDATE login SET tokenTime = CURRENT_TIMESTAMP WHERE userID = ?`, [
+    id,
+  ]);
 }
 
 function refreshToken(dao, id) {
-  let randomStr = crypto.randomBytes(20).toString('hex');
-  dao.run(`UPDATE login SET tokenTime = CURRENT_TIMESTAMP, token = ? WHERE userID = ?`,
+  let randomStr = crypto.randomBytes(20).toString("hex");
+  dao.run(
+    `UPDATE login SET tokenTime = CURRENT_TIMESTAMP, token = ? WHERE userID = ?`,
     [randomStr, id]
-  )
+  );
 }
 
-exports.loginAccount = loginAccount
-exports.createAccount = createAccount
+exports.loginAccount = loginAccount;
+exports.createAccount = createAccount;
+exports.refreshTokenDate = refreshTokenDate;

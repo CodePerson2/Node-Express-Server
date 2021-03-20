@@ -7,12 +7,9 @@ function main() {
   //dao.all(`select * from login`).then((r) => {console.log(r)})
   //group.createGroup(['fred', 'billy'])
 
-
-  //login.createAccount('fred', 'ajasnjdnas')
+  //login.loginAccount('fred', 'ajasnjdnas')
   //dao.all('select * from login').then((r) => {console.log(r)})
-  group.sendMessage( 'ffb2316425aa348fb6f32de437c07649090ed18b', 1, 1, 'hello')
-
-
+  group.sendMessage("7c517deff4aa7f3eaf4f9c155dbea86a6ca33824", 1, 1, "hello");
 }
 main();
 
