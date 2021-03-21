@@ -5,11 +5,14 @@ const login = require("./login");
 function main() {
   const dao = new AppDAO("./database.sqlite3");
   //dao.all(`select * from login`).then((r) => {console.log(r)})
-  //group.createGroup(['fred', 'billy'])
+  //group.createGroup([1, 2])
+  //login.createAccount('bill', 'billww', 'billww')
 
   //login.loginAccount('fred', 'ajasnjdnas')
-  //dao.all('select * from login').then((r) => {console.log(r)})
-  group.sendMessage("7c517deff4aa7f3eaf4f9c155dbea86a6ca33824", 1, 1, "hello");
+  group.getChats(1, 'e8896cf23044d2bf26ba0fbfef0dda6f2a1adc5f')
+  //group.sendMessage('0e2e3becc76ede17510e69216932a4ec8e9171b4', 1, 1 , 'Hello bobby guy what be good with uu')
+  //dao.all('select * from userChat').then((r) => {console.log(r)})
+  //group.sendMessage("7c517deff4aa7f3eaf4f9c155dbea86a6ca33824", 1, 1, "hello");
 }
 main();
 
@@ -32,7 +35,7 @@ main();
 
 // CREATE TABLE IF NOT EXISTS chatGroup(
 //   groupID INTEGER PRIMARY KEY,
-//   name VARCHAR(30) NOT NULL,
+//   name VARCHAR(30),
 //   create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 // )
 
