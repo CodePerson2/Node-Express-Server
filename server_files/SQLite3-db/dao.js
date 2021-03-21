@@ -8,6 +8,15 @@ class AppDAO {
         console.log("Error connecting to database", err);
       } else {
         //console.log("Connected to database");
+        this.db.run("PRAGMA foreign_keys = ON", [], (err, rows) => {
+          if (err) {
+            console.log("Error!, ", err);
+            console.log(sql);
+            console.log(err);
+          } else {
+            
+          }
+        });
       }
     });
   }

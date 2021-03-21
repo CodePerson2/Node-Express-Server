@@ -8,7 +8,7 @@ const database = "./database.sqlite3";
 function createGroup(usernames) {
   const dao = new AppDAO(database);
 
-  dao.run(`INSERT INTO chatGroup (name) VALUES (?)`, ['1']).then((val) => {
+  dao.run(`INSERT INTO chatGroup (name) VALUES (?)`, []).then((val) => {
     dao.get(`SELECT last_insert_rowid()`).then((val) => {
       usernames.forEach((element) => {
         dao.run(`INSERT INTO userChat (groupID, userID) VALUES (?, ?) `, [
@@ -67,18 +67,43 @@ function getChats(userid, token) {
     if (tok) {
       dao
         .all(
-          `SELECT login.userName, message.message
-          FROM login 
-          INNER JOIN userChat ON login.userID = userChat.userID 
-          INNER JOIN chatGroup on chatGroup.groupID = userChat.groupID
-          INNER JOIN message on message.groupID = chatGroup.groupID
-          INNER JOIN userChat as chat2 on chat2.groupID = chatGroup.groupID
-          INNER JOIN login as log2 on log2.userID = chat2.userID
-          where login.userID = ? AND log2.userID != ?
-          group by login.userName
-          ORDER BY message.message DESC 
-          `,
-          [userid, userid]
+            `SELECT grp.groupID, grp.groupName, mess.message, mess.sender, mess.messDate
+            FROM (SELECT chat.groupID as groupID, chat.groupName as groupName
+            FROM userChat
+            INNER JOIN 
+              (SELECT userChat.groupID as groupID, chatGroup.name as groupName
+                FROM login 
+                INNER JOIN userChat ON userChat.userID = login.userID
+                INNER JOIN chatGroup ON chatGroup.groupID = userChat.groupID
+                where login.userID = ?
+              ) 
+              AS chat
+              ON chat.groupID = userChat.groupID
+              INNER JOIN login as log ON log.userID = userChat.userID
+              where log.userID != ?
+              GROUP BY log.userID, chat.groupID) AS grp
+
+              LEFT JOIN
+
+              (SELECT x.message, x.groupID, x.sender, x.messDate FROM 
+              (SELECT grp.groupID as groupID, message.message as message,
+                message.userID as sender, message.create_at as messDate
+              FROM message
+              INNER JOIN 
+                (SELECT userChat.groupID AS groupID
+                FROM login 
+                INNER JOIN userChat ON userChat.userID = login.userID
+                where login.userID = ?
+                GROUP BY login.userID, userChat.groupID) 
+              AS grp
+              ON grp.groupID = message.groupID
+              ORDER BY message.create_at DESC) 
+            as x
+            GROUP BY x.groupID) AS mess
+            ON mess.groupID = grp.groupID
+            `
+          ,
+          [userid, userid, userid]
         )
         .then((row) => {
           console.log(row);
