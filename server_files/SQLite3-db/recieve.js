@@ -17,6 +17,13 @@ function recieve(app) {
         res.send(resp);
       });
   });
+
+  app.post("/getFriends/", (req, res) => {
+    var info = req.body;
+    group.getChats(info.userID, info.token).then((resp) => {
+      res.send(resp);
+    });
+  });
 }
 
 exports.recieve = recieve;

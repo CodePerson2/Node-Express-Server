@@ -63,10 +63,13 @@ function getMessages(groupid, userid, token, lastID = 0) {
 
 function getChats(userid, token) {
   const dao = new AppDAO(database);
-  checkToken(token, userid, dao).then((tok) => {
-    if (tok) {
-      dao
-        .all(
+
+  return new Promise((res, rej) => {
+    var tokenRes = checkToken(token, userid, dao, res)
+    tokenRes.then((tok) => {
+      if (tok) {
+        dao
+          .all(
             `SELECT grp.groupID, grp.groupName, mess.message, mess.sender, mess.messDate
             FROM (SELECT chat.groupID as groupID, chat.groupName as groupName
             FROM userChat
@@ -101,14 +104,19 @@ function getChats(userid, token) {
             as x
             GROUP BY x.groupID) AS mess
             ON mess.groupID = grp.groupID
-            `
-          ,
-          [userid, userid, userid]
-        )
-        .then((row) => {
-          console.log(row);
-        });
-    }
+            `,
+            [userid, userid, userid]
+          )
+          .then((row) => {
+            if (row.length === 0) res({ success: 0, rows: 0, res: "No Chats" });
+            res(row);
+          });
+        
+      }
+    });
+    tokenRes.catch((val) => {
+      res(val)
+    })
   });
 }
 
@@ -144,9 +152,10 @@ function checkToken(token, userid, dao) {
       .then((val) => {
         if (val === undefined) {
           //tell user token is corrupt login again
+          rej({success: 0, res: "Token is Corrupt"})
         } else if (val.time / 60 > tokenMax) {
           //Tell user to login again
-          rej(false);
+          rej({success: 0, res: "Token is Out of Date"});
         } else {
           login.refreshTokenDate(dao, userid);
           res(true);

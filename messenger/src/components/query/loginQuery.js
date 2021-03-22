@@ -20,17 +20,20 @@ export const signUpQuery = (
 };
 
 const querySignIn = (username, password, setLogIn, makeNotification) => {
-  var returnVal = sendLogin("/login/", {
-    username: username,
-    password: password,
+  const sign =  new Promise((res, rej) => {
+    sendLogin("/login/", res, {
+      username: username,
+      password: password,
+    });
+  })
+  sign.then((res) => {
+    if (res.success === 1) {
+      setLogIn(res.userID, res.token, res.username);
+    } else {
+      makeNotification(res.response);
+      return;
+    }
   });
-
-  if (returnVal.success === 1) {
-    setLogIn();
-  } else {
-    makeNotification(returnVal.response);
-    return;
-  }
 };
 
 const querySignUp = (username, password1, password2, makeNotification) => {
@@ -64,7 +67,6 @@ function sendLogin(queryLocation, res, info) {
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       var resp = JSON.parse(this.responseText);
-      console.log(resp);
       res(resp);
     }
   };

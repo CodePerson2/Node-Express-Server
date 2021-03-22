@@ -76,6 +76,27 @@ export const getMessages = () => {
   return messages;
 };
 
-export const getFriends = () => {
-  return friends;
+export const getFriends = (res, id, token) => {
+  return queryFriends(res, '/getFriends/', {token: token, userID: id});
 };
+
+function queryFriends(res, queryLocation, info) {
+  var xhttp;
+  var loc = queryLocation;
+  info = JSON.stringify(info);
+
+  xhttp = new XMLHttpRequest();
+  xhttp.open("POST", loc, true);
+  xhttp.setRequestHeader("Content-Type", "application/json");
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      var resp = JSON.parse(this.responseText);
+      console.log(resp)
+      console.log("here")
+      res(resp);
+    }
+  };
+
+  xhttp.send(info);
+}

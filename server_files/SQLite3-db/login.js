@@ -14,7 +14,10 @@ function createAccount(username, password1, password2) {
       console.log("pass dont match");
     } else if (password1.length < passLength) {
       //tell user password is too short
-      res({ success: 0, response: "Password is too short. Must be longer than 5 characters" });
+      res({
+        success: 0,
+        response: "Password is too short. Must be longer than 5 characters",
+      });
       console.log("pass too short");
     }
     dao
@@ -30,7 +33,7 @@ function createAccount(username, password1, password2) {
       })
       .then(() => {
         res({ success: 1, response: "Account Created" });
-      })
+      });
   });
 }
 
@@ -46,7 +49,12 @@ function loginAccount(username, password) {
           res({ success: 0, response: "No User Found" });
         } else if (passHash.verify(password, val.password)) {
           refreshToken(dao, val.userID).then((tok) => {
-            res({ token: tok, userID: val.userID });
+            res({
+              success: 1,
+              token: tok,
+              userID: val.userID,
+              username: val.userName,
+            });
           });
         } else {
           res({ success: 0, response: "Wrong Password or UserName" });

@@ -8,6 +8,11 @@ import Notification from "./components/notification/Notification";
 
 function App() {
   const [name, setName] = useState("");
+
+  const [username, setUsername] = useState("");
+  const [token, setToken] = useState("");
+  const [userid, setUserid] = useState(0);
+
   const [appWidth, setAppWidth] = useState(0);
   const [appLocation, setAppLocation] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -17,9 +22,9 @@ function App() {
   const [notifText, setNotifText] = useState("");
   const [notifState, setNotifState] = useState(false);
 
-  const App = useRef(null);
-
   const [friends, setFriends] = useState(null);
+
+  const App = useRef(null);
 
   //Get width of App for adjusting UI
   useEffect(() => {
@@ -62,13 +67,26 @@ function App() {
     setDarkMode(!darkMode);
   };
 
-  const returnFriends = () => {
-    var friends = getFriends();
-    setFriends(friends);
+  const returnFriends = (id, token) => {
+    var friends = new Promise((res, rej) => {
+      getFriends(res, id, token);
+    });
+    friends.then((res) => {
+      if (res === undefined) setFriends([]);
+      else setFriends(res);
+      console.log(res);
+    });
   };
 
-  const changeLoggedIn = (id, token, name) => {
-    returnFriends();
+  const changeLoggedIn = (id = 0, token = "", user = "") => {
+    setUsername(user);
+    setToken(token);
+    setUserid(id);
+    console.log(user + " " + token + " " + id);
+
+    if (!loggedIn) {
+      returnFriends(id, token);
+    }
     loadPage();
     setLoading(true);
     setTimeout(() => {
@@ -90,7 +108,7 @@ function App() {
     setTimeout(() => {
       setNotifState(false);
     }, 3000);
-  }
+  };
 
   return (
     <div className={`App ${darkMode ? "main-D" : "main-L"}`} ref={App}>
@@ -122,7 +140,11 @@ function App() {
         className={`loadTran ${darkMode ? "side-D" : "side-L"}`}
       ></div>
 
-      <Notification darkMode={darkMode} notifState={notifState} notifText={notifText}/>
+      <Notification
+        darkMode={darkMode}
+        notifState={notifState}
+        notifText={notifText}
+      />
     </div>
   );
 }
