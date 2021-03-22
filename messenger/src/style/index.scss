@@ -1,0 +1,448 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import "extra";
+@import "color";
+@import "SignIn";
+@import "notif";
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  max-height: 100%;
+  left: 0;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8rem;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-self: center;
+  background-color: $main-background;
+  height: 100%;
+  width: 100%;
+  column-count: 2;
+
+
+  &-SideBar {
+    height: 100%;
+    display: block;
+    background-color: $side-bar;
+    width: 30%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-flow: column;
+    transition: all 0.5s ease-in-out;
+
+    &-Settings {
+      margin-top: 10px;
+      font-size: 2.2rem;
+      position: absolute;
+      right: 10px;
+      padding: 0px 6px;
+      padding-top: 6px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: $text-main;
+    }
+
+    &-Logout{
+
+      button {
+        background-color: $blue-bubble;
+        font-size: 0.9rem;
+        border-radius: 15px;
+        color: $text-main;
+        padding: 9px 4px;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        width: 70px;
+        min-width: 50px;
+        max-width: 100px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.05s ease-in-out;
+      }
+      button:active {
+        background-color: rgb(121, 140, 245);
+        font-size: 1rem;
+        
+      }
+
+    }
+    &-Settings:active {
+      background-color: $side-bar-highlight;
+      color: $blue-bubble;
+    }
+
+    &-Back {
+      margin-top: 10px;
+      font-size: 2rem;
+      position: absolute;
+      left: 10px;
+      padding: 0px 6px;
+      padding-top: 6px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: $text-main;
+    }
+
+    &-Back:active {
+      background-color: $side-bar-highlight;
+      color: $blue-bubble;
+    }
+
+    &-Title {
+      color: $text-main;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 55px;
+    }
+
+    &-Boxes {
+      overflow: auto;
+      flex: 1 1 auto;
+      cursor: pointer;
+
+      &-Box {
+        padding: 10px 5px;
+        margin-left: 4px;
+
+        &-name {
+          margin-top: 10px;
+          color: $text-main;
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        &-Cont {
+          display: flex;
+          flex-direction: row;
+          height: 16px;
+          margin-top: 5px;
+          &-messageSender {
+            color: $text-subtle;
+            flex: 0 1 auto;
+            margin-right: 4px;
+          }
+
+          &-message {
+            color: $text-subtle2;
+            overflow: hidden;
+            flex: 0 1 auto;
+            margin-right: 4px;
+          }
+          &-date {
+            color: $text-subtle;
+            flex: 0 1 auto;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+
+    &-Search {
+      right: 0;
+      margin: auto;
+      margin: 10px auto;
+      max-width: 500px;
+      width: 95%;
+      flex: 0 1 auto;
+
+      input {
+        display: block;
+        height: 30px;
+        font-size: 1rem;
+        padding: 2px 10px;
+        margin: 7px auto;
+        max-width: 90%;
+        min-width: 60%;
+        border: none;
+        border-radius: 15px;
+      }
+    }
+  }
+
+  &-MessageBox {
+    min-width: 70%;
+    position: absolute;
+    top: 0;
+    left: 30%;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+
+    &-Title {
+      color: $text-main;
+      position: relative;
+      padding: 0px 0px;
+      font-weight: 600;
+      display: flex;
+      flex-flow: row;
+      height: 60px;
+
+      &-Name {
+        overflow: auto;
+        max-width: 150px;
+        position: relative;
+        flex: 1 1 auto;
+        font-size: 1.7rem;
+        padding-left: 20px;
+        margin-top: 20px;
+      }
+
+      &-Back {
+        margin-top: 20px;
+        font-size: 2rem;
+        flex: 0 1 30px;
+        position: relative;
+        margin-left: 15px;
+        padding: 0px 6px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: $text-main;
+      }
+
+      &-Back:active {
+        background-color: $side-bar-highlight;
+        color: $blue-bubble;
+      }
+    }
+
+    &-Messages {
+      width: 100%;
+      overflow: auto;
+
+      &-Message {
+        width: 100%;
+        text-align: left;
+
+        &-Bub {
+          &-Text {
+            word-break: break-all;
+            border-radius: 15px;
+            background-color: $blue-bubble;
+            color: $text-main;
+            padding: 7px 10px;
+            display: inline-block;
+            max-width: 40%;
+            font-size: 0.9rem;
+            margin: 0 5px;
+            text-align: left;
+          }
+        }
+
+        &-Time {
+          display: block;
+          margin: auto;
+          text-align: center;
+          font-size: 0.8rem;
+          color: $text-main;
+        }
+
+        &-Name {
+          font-size: 0.7rem;
+          color: $text-subtle;
+          margin: 0 15px;
+        }
+      }
+    }
+
+    &-Input {
+      width: 100%;
+      //flex: 0 1 auto;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      textarea {
+        font-size: 1.16rem;
+        position: absolute;
+        bottom: 5px;
+        width: 60%;
+        min-width: 120px;
+        margin-left: 3%;
+        border-radius: 15px;
+        height: 18px;
+        margin-bottom: 7px;
+        padding: 8px 8px;
+        // color: $text-main;
+        // background-color: $input-bar;
+        resize: none;
+        border: none;
+      }
+
+      button {
+        background-color: $blue-bubble;
+        font-size: 1.1rem;
+        border-radius: 15px;
+        color: $text-main;
+        padding: 9px 8px;
+        position: absolute;
+        right: 3%;
+        bottom: 13px;
+        width: 20%;
+        min-width: 60px;
+        max-width: 100px;
+        border: none;
+        cursor: pointer;
+      }
+      button:active {
+        background-color: rgb(121, 140, 245);
+        font-size: 1.2rem;
+        transition: all 0.05s ease-in-out;
+      }
+    }
+  }
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+
+  input { 
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+    
+  }
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.Settings{
+  text-align: center;
+  margin-top: 50px;
+
+  &-Title{
+    font-size: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-bottom: 35px;
+    padding: 0 30px;
+  }
+}
+
+//dark mode
+
+.blue {
+  background-color: $blue-bubble;
+}
+.grey {
+  background-color: $grey-bubble;
+}
+
+.text1-D {
+  color: $text-main;
+}
+.text2-D {
+  color: $text-subtle;
+}
+.text3-D {
+  color: $text-subtle2;
+}
+.bubble-B-D {
+  color: $text-main;
+  background-color: $blue-bubble;
+}
+.bubble-G-D {
+  color: $text-main;
+  background-color: $grey-bubble;
+}
+.input-D {
+  color: $text-main;
+  background-color: $input-bar;
+}
+.side-D {
+  color: $text-main;
+  background-color: $side-bar;
+}
+.sideHigh-D {
+  color: $text-main;
+  background-color: $side-bar-highlight;
+}
+.main-D {
+  background-color: $main-background;
+}
+
+//light mode
+.text1-L {
+  color: $text-main-l;
+}
+.text2-L {
+  color: $text-subtle-l;
+}
+.text3-L {
+  color: $text-subtle2-l;
+}
+.bubble-B-L {
+  color: $text-main-l;
+  background-color: $blue-bubble-l;
+}
+.bubble-G-L {
+  color: $text-main-l;
+  background-color: $grey-bubble-l;
+}
+.input-L {
+  color: $text-main-l;
+  background-color: $input-bar-l;
+}
+.side-L {
+  color: $text-main-l;
+  background-color: $side-bar-l;
+}
+.sideHigh-L {
+  color: $text-main-l;
+  background-color: $side-bar-highlight-l;
+}
+.main-L {
+  background-color: $main-background-l;
+}

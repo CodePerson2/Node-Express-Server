@@ -1,0 +1,724 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+::-webkit-scrollbar {
+  border-radius: 10px;
+  height: 10px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #858585;
+  border-radius: 10px;
+  border-left-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8b8b8;
+  opacity: 1;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8b8b8;
+  opacity: 1;
+  /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8b8b8;
+  opacity: 1;
+  /* Firefox */
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b8b8b8;
+  opacity: 1;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #b8b8b8;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #b8b8b8;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: none;
+}
+
+div:focus {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0;
+  -o-user-select: none;
+}
+
+::-moz-selection {
+  color: none;
+  background: none;
+}
+
+::selection {
+  color: none;
+  background: none;
+}
+
+/* For Mozilla Firefox */
+::-moz-selection {
+  color: none;
+  background: none;
+}
+
+.Login {
+  width: 90%;
+  max-width: 400px;
+  padding: 50px 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+
+.Login-Title {
+  text-align: center;
+  font-size: 2.1rem;
+  color: #5e5edf;
+}
+
+.Login-Title div {
+  display: inline-block;
+  margin: 15px 7px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.SignIn {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.SignIn-Inp {
+  display: block;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.SignIn-Inp input[type="text"],
+.SignIn-Inp input[type="password"] {
+  height: 30px;
+  display: block;
+  width: 400px;
+  max-width: 80%;
+  margin: 30px auto;
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  font-size: 1.6rem;
+}
+
+.SignIn-Sub {
+  display: inline-block;
+  width: 100%;
+  margin: auto;
+}
+
+.SignIn-Sub-Rem {
+  display: block;
+  width: 400px;
+  max-width: 80%;
+  margin: 30px auto;
+  margin-top: 0;
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.SignIn-Sub-Rem label {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.SignIn-Sub-Rem input {
+  font-size: 2.4rem;
+  width: 20px;
+  margin-right: 20px;
+  /* IE */
+  /* FF */
+  -webkit-transform: scale(2);
+  /* Safari and Chrome */
+  /* Opera */
+  transform: scale(2);
+}
+
+.SignIn-Sub-Rem input:checked + label {
+  color: #5e5edf;
+}
+
+.SignIn-Sub button {
+  display: block;
+  width: 400px;
+  max-width: 80%;
+  margin: 30px auto;
+  border-radius: 10px;
+  border: none;
+  height: 50px;
+  background-color: #5e5edf;
+  color: #fcfcfc;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.SignIn-Sub button:active {
+  background-color: #798cf5;
+  font-size: 2.1rem;
+  -webkit-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
+}
+
+.loadTran {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.Notif {
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  border-radius: 15px;
+  display: inline-block;
+  padding: 7px 7px;
+  text-align: center;
+  opacity: 0;
+  position: absolute;
+  max-width: 80%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  font-size: 1.7rem;
+  -webkit-box-shadow: 0px 0px 25px 4px #5e5edf;
+          box-shadow: 0px 0px 25px 4px #5e5edf;
+  border: solid 3px #5e5edf;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  max-height: 100%;
+  left: 0;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8rem;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  background-color: #161515;
+  height: 100%;
+  width: 100%;
+  -webkit-column-count: 2;
+          column-count: 2;
+}
+
+.App-SideBar {
+  height: 100%;
+  display: block;
+  background-color: #252929;
+  width: 30%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.App-SideBar-Settings {
+  margin-top: 10px;
+  font-size: 2.2rem;
+  position: absolute;
+  right: 10px;
+  padding: 0px 6px;
+  padding-top: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fcfcfc;
+}
+
+.App-SideBar-Logout button {
+  background-color: #5e5edf;
+  font-size: 0.9rem;
+  border-radius: 15px;
+  color: #fcfcfc;
+  padding: 9px 4px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 70px;
+  min-width: 50px;
+  max-width: 100px;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
+}
+
+.App-SideBar-Logout button:active {
+  background-color: #798cf5;
+  font-size: 1rem;
+}
+
+.App-SideBar-Settings:active {
+  background-color: rgba(82, 82, 82, 0.603);
+  color: #5e5edf;
+}
+
+.App-SideBar-Back {
+  margin-top: 10px;
+  font-size: 2rem;
+  position: absolute;
+  left: 10px;
+  padding: 0px 6px;
+  padding-top: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fcfcfc;
+}
+
+.App-SideBar-Back:active {
+  background-color: rgba(82, 82, 82, 0.603);
+  color: #5e5edf;
+}
+
+.App-SideBar-Title {
+  color: #fcfcfc;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 55px;
+}
+
+.App-SideBar-Boxes {
+  overflow: auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  cursor: pointer;
+}
+
+.App-SideBar-Boxes-Box {
+  padding: 10px 5px;
+  margin-left: 4px;
+}
+
+.App-SideBar-Boxes-Box-name {
+  margin-top: 10px;
+  color: #fcfcfc;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.App-SideBar-Boxes-Box-Cont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 16px;
+  margin-top: 5px;
+}
+
+.App-SideBar-Boxes-Box-Cont-messageSender {
+  color: #c5c5c5;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  margin-right: 4px;
+}
+
+.App-SideBar-Boxes-Box-Cont-message {
+  color: #868686;
+  overflow: hidden;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  margin-right: 4px;
+}
+
+.App-SideBar-Boxes-Box-Cont-date {
+  color: #c5c5c5;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  overflow: hidden;
+}
+
+.App-SideBar-Search {
+  right: 0;
+  margin: auto;
+  margin: 10px auto;
+  max-width: 500px;
+  width: 95%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+}
+
+.App-SideBar-Search input {
+  display: block;
+  height: 30px;
+  font-size: 1rem;
+  padding: 2px 10px;
+  margin: 7px auto;
+  max-width: 90%;
+  min-width: 60%;
+  border: none;
+  border-radius: 15px;
+}
+
+.App-MessageBox {
+  min-width: 70%;
+  position: absolute;
+  top: 0;
+  left: 30%;
+  height: 100%;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.App-MessageBox-Title {
+  color: #fcfcfc;
+  position: relative;
+  padding: 0px 0px;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  height: 60px;
+}
+
+.App-MessageBox-Title-Name {
+  overflow: auto;
+  max-width: 150px;
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  font-size: 1.7rem;
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+.App-MessageBox-Title-Back {
+  margin-top: 20px;
+  font-size: 2rem;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 30px;
+          flex: 0 1 30px;
+  position: relative;
+  margin-left: 15px;
+  padding: 0px 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fcfcfc;
+}
+
+.App-MessageBox-Title-Back:active {
+  background-color: rgba(82, 82, 82, 0.603);
+  color: #5e5edf;
+}
+
+.App-MessageBox-Messages {
+  width: 100%;
+  overflow: auto;
+}
+
+.App-MessageBox-Messages-Message {
+  width: 100%;
+  text-align: left;
+}
+
+.App-MessageBox-Messages-Message-Bub-Text {
+  word-break: break-all;
+  border-radius: 15px;
+  background-color: #5e5edf;
+  color: #fcfcfc;
+  padding: 7px 10px;
+  display: inline-block;
+  max-width: 40%;
+  font-size: 0.9rem;
+  margin: 0 5px;
+  text-align: left;
+}
+
+.App-MessageBox-Messages-Message-Time {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #fcfcfc;
+}
+
+.App-MessageBox-Messages-Message-Name {
+  font-size: 0.7rem;
+  color: #c5c5c5;
+  margin: 0 15px;
+}
+
+.App-MessageBox-Input {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+}
+
+.App-MessageBox-Input textarea {
+  font-size: 1.16rem;
+  position: absolute;
+  bottom: 5px;
+  width: 60%;
+  min-width: 120px;
+  margin-left: 3%;
+  border-radius: 15px;
+  height: 18px;
+  margin-bottom: 7px;
+  padding: 8px 8px;
+  resize: none;
+  border: none;
+}
+
+.App-MessageBox-Input button {
+  background-color: #5e5edf;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  color: #fcfcfc;
+  padding: 9px 8px;
+  position: absolute;
+  right: 3%;
+  bottom: 13px;
+  width: 20%;
+  min-width: 60px;
+  max-width: 100px;
+  border: none;
+  cursor: pointer;
+}
+
+.App-MessageBox-Input button:active {
+  background-color: #798cf5;
+  font-size: 1.2rem;
+  -webkit-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.switch input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+  -webkit-box-shadow: 0 0 1px #2196F3;
+          box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.Settings {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.Settings-Title {
+  font-size: 1.2rem;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-bottom: 35px;
+  padding: 0 30px;
+}
+
+.blue {
+  background-color: #5e5edf;
+}
+
+.grey {
+  background-color: #414141;
+}
+
+.text1-D {
+  color: #fcfcfc;
+}
+
+.text2-D {
+  color: #c5c5c5;
+}
+
+.text3-D {
+  color: #868686;
+}
+
+.bubble-B-D {
+  color: #fcfcfc;
+  background-color: #5e5edf;
+}
+
+.bubble-G-D {
+  color: #fcfcfc;
+  background-color: #414141;
+}
+
+.input-D {
+  color: #fcfcfc;
+  background-color: #505050;
+}
+
+.side-D {
+  color: #fcfcfc;
+  background-color: #252929;
+}
+
+.sideHigh-D {
+  color: #fcfcfc;
+  background-color: rgba(82, 82, 82, 0.603);
+}
+
+.main-D {
+  background-color: #161515;
+}
+
+.text1-L {
+  color: #141414;
+}
+
+.text2-L {
+  color: #3a3a3a;
+}
+
+.text3-L {
+  color: #7c7b7b;
+}
+
+.bubble-B-L {
+  color: #141414;
+  background-color: #a0a0ff;
+}
+
+.bubble-G-L {
+  color: #141414;
+  background-color: #dfdfdf;
+}
+
+.input-L {
+  color: #141414;
+  background-color: #e6e6e6;
+}
+
+.side-L {
+  color: #141414;
+  background-color: #f0f0f0;
+}
+
+.sideHigh-L {
+  color: #141414;
+  background-color: rgba(212, 211, 211, 0.603);
+}
+
+.main-L {
+  background-color: #f8f8f8;
+}
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,114 @@
+.Login {
+  width: 90%;
+  max-width: 400px;
+  //height: 100%;
+  padding: 50px 0px;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+
+
+  &-Title {
+    text-align: center;
+    font-size: 2.1rem;
+    color: $blue-bubble;
+
+    div {
+      display: inline-block;
+      margin: 15px 7px;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      
+    }
+  }
+}
+
+.SignIn {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  transition: all 0.5s ease-in-out;
+
+  &-Inp {
+    display: block;
+    width: 100%;
+    align-items: center;
+
+    input[type="text"],
+    input[type="password"] {
+      height: 30px;
+      display: block;
+      width: 400px;
+      max-width: 80%;
+      margin: 30px auto;
+      border-radius: 10px;
+      border: none;
+      padding: 12px;
+      font-size: 1.6rem;
+    }
+  }
+  &-Sub {
+    display: inline-block;
+    width: 100%;
+    margin: auto;
+    &-Rem {
+      display: block;
+      width: 400px;
+      max-width: 80%;
+      margin: 30px auto;
+      margin-top: 0;
+      position: relative;
+      text-align: center;
+      font-size: 1.5rem;
+      label {
+        transition: all 0.2s ease-in-out;
+      }
+      input {
+        font-size: 2.4rem;
+        width: 20px;
+        margin-right: 20px;
+        -ms-transform: scale(2); /* IE */
+        -moz-transform: scale(2); /* FF */
+        -webkit-transform: scale(2); /* Safari and Chrome */
+        -o-transform: scale(2); /* Opera */
+        transform: scale(2);
+      }
+      input:checked + label {
+        color: $blue-bubble;
+      }
+    }
+    button {
+      display: block;
+      width: 400px;
+      max-width: 80%;
+      margin: 30px auto;
+      border-radius: 10px;
+      border: none;
+      height: 50px;
+      background-color: $blue-bubble;
+      color: $text-main;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    button:active {
+      background-color: rgb(121, 140, 245);
+      font-size: 2.1rem;
+      transition: all 0.05s ease-in-out;
+    }
+  }
+}
+.loadTran{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+
+}
