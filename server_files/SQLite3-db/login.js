@@ -7,24 +7,31 @@ const passLength = 6;
 
 function createAccount(username, password1, password2) {
   const dao = new AppDAO("./database.sqlite3");
-
-  if (password1 !== password2) {
-    //tell user passwords dont match
-    console.log("pass dont match");
-  } else if (password1.length < passLength) {
-    //tell user password is too short
-    console.log("pass too short");
-  }
-  dao
-    .run(`insert into login (userName, password) VALUES (?, ?)`, [
-      username,
-      passHash.generate(password1),
-    ])
-    .catch((err) => {
-      if (err.errno == 19) {
-        //tell user username is already taken
-      }
-    });
+  return new Promise((res, rej) => {
+    if (password1 !== password2) {
+      //tell user passwords dont match
+      res({ success: 0, response: "Passwords do not match" });
+      console.log("pass dont match");
+    } else if (password1.length < passLength) {
+      //tell user password is too short
+      res({ success: 0, response: "Password is too short. Must be longer than 5 characters" });
+      console.log("pass too short");
+    }
+    dao
+      .run(`insert into login (userName, password) VALUES (?, ?)`, [
+        username,
+        passHash.generate(password1),
+      ])
+      .catch((err) => {
+        if (err.errno == 19) {
+          //tell user username is already taken
+          res({ success: 0, response: "Username already Taken" });
+        }
+      })
+      .then(() => {
+        res({ success: 1, response: "Account Created" });
+      })
+  });
 }
 
 function loginAccount(username, password) {
@@ -36,13 +43,13 @@ function loginAccount(username, password) {
       .then((val) => {
         if (val === undefined) {
           //no user found
-          res ({ success: 0, response: "No User Found" });
+          res({ success: 0, response: "No User Found" });
         } else if (passHash.verify(password, val.password)) {
           refreshToken(dao, val.userID).then((tok) => {
-            res({token: tok, userID: val.userID});
+            res({ token: tok, userID: val.userID });
           });
         } else {
-          res ({ success: 0, response: "Wrong Password or UserName" });
+          res({ success: 0, response: "Wrong Password or UserName" });
         }
       });
   });
