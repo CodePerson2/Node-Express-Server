@@ -30,15 +30,21 @@ function createAccount(username, password1, password2) {
 function loginAccount(username, password) {
   const dao = new AppDAO("./database.sqlite3");
 
-  dao.get(`select * from login where userName = ?`, [username]).then((val) => {
-    if (val === undefined) console.log("no user found");
-    else if (passHash.verify(password, val.password)) {
-      refreshToken(dao, val.userID).then((tok) => {
-        console.log(tok);
+  return new Promise((res, rej) => {
+    dao
+      .get(`select * from login where userName = ?`, [username])
+      .then((val) => {
+        if (val === undefined) {
+          //no user found
+          res ({ success: 0, response: "No User Found" });
+        } else if (passHash.verify(password, val.password)) {
+          refreshToken(dao, val.userID).then((tok) => {
+            res({token: tok, userID: val.userID});
+          });
+        } else {
+          res ({ success: 0, response: "Wrong Password or UserName" });
+        }
       });
-    } else {
-      //wrong password
-    }
   });
 }
 

@@ -36,7 +36,7 @@ function sendMessage(token, userid, groupid, message) {
   });
 }
 
-function getMessages(groupid, userid, token) {
+function getMessages(groupid, userid, token, lastID = 0) {
   const dao = new AppDAO(database);
   checkToken(token, userid, dao).then((tok) => {
     if (tok) {
@@ -44,13 +44,13 @@ function getMessages(groupid, userid, token) {
         if (val) {
           dao
             .all(
-              `SELECT message.message, message.create_at, login.userName 
+              `SELECT message.message, message.create_at, login.userName, message.messageId 
               FROM message 
               INNER JOIN login ON login.userID = message.userID 
-              where groupID = ? 
+              where groupID = ? AND messageID > ?
               ORDER BY message.create_at 
               DESC LIMIT 12`,
-              [groupid]
+              [groupid, lastID]
             )
             .then((row) => {
               console.log(row);

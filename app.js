@@ -8,6 +8,7 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 var favicon = require("serve-favicon");
+const react_reciever = require("./server_files/SQLite3-db/recieve");
 var port = process.env.PORT;
 var port2 = process.env.PORT2;
 
@@ -29,6 +30,7 @@ app.use(
 
 app.use(favicon(path.join(__dirname, "public", "favicon", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "messenger/build")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //serves index page
@@ -36,7 +38,8 @@ app.get("/", (req, res) => {
   if (!req.secure) {
     res.redirect("https://" + req.headers.host + req.url); //force ssl
   }
-  res.sendFile(__dirname + "/public/home.html");
+  //res.sendFile(__dirname + "/public/home.html");
+  res.sendFile(path.join(__dirname, "messenger", "build", "index.html"));
 });
 
 //Used connection for https requests and socket communtication
@@ -57,7 +60,10 @@ app.post("/contact-information/", (req, res) => {
   );
 });
 
-//main connection, handles all functions
+//react messenger 
+react_reciever.recieve(app);
+
+//connection for monkey tag, handles all functions
 io.on("connection", function (socket) {
   monkey.startServer(io, socket);
 
