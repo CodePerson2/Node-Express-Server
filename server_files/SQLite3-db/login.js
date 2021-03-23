@@ -3,10 +3,12 @@ const passHash = require("password-hash");
 const crypto = require("crypto");
 const Promise = require("bluebird");
 
+const database = "./database.sqlite3";
 const passLength = 6;
+const userLen = 3;
 
 function createAccount(username, password1, password2) {
-  const dao = new AppDAO("./database.sqlite3");
+  const dao = new AppDAO(database);
   return new Promise((res, rej) => {
     if (password1 !== password2) {
       //tell user passwords dont match
@@ -19,6 +21,13 @@ function createAccount(username, password1, password2) {
         response: "Password is too short. Must be longer than 5 characters",
       });
       console.log("pass too short");
+    } else if (username.length < userLen) {
+      //tell user password is too short
+      res({
+        success: 0,
+        response: "Username is too short. Must be longer than 2 characters",
+      });
+      console.log("username too short");
     }
     dao
       .run(`insert into login (userName, password) VALUES (?, ?)`, [
@@ -38,7 +47,7 @@ function createAccount(username, password1, password2) {
 }
 
 function loginAccount(username, password) {
-  const dao = new AppDAO("./database.sqlite3");
+  const dao = new AppDAO(database);
 
   return new Promise((res, rej) => {
     dao

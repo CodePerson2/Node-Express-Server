@@ -14,6 +14,9 @@ export const signUpQuery = (
   } else if (password1.length < 6) {
     makeNotification("Password Must Be Atlest 6 Characters");
     return;
+  } else if (username.length < 3) {
+    makeNotification("Username Must Be Atlest 3 Characters");
+    return;
   }
 
   querySignUp(username, password1, password2, makeNotification);

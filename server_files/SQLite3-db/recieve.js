@@ -24,6 +24,21 @@ function recieve(app) {
       res.send(resp);
     });
   });
+
+  app.post("/getSearch/", (req, res) => {
+    var info = req.body;
+    var srch = new Promise((res, rej) => {
+      search.getSearch(
+        info.userID,
+        info.token,
+        info.search,
+        res
+      );
+    });
+    srch.then((val) => {
+      res.send(val);
+    });
+  });
 }
 
 exports.recieve = recieve;

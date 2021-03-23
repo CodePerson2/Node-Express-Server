@@ -47,7 +47,7 @@ function getMessages(groupid, userid, token, lastID = 0) {
               `SELECT message.message, message.create_at, login.userName, message.messageId 
               FROM message 
               INNER JOIN login ON login.userID = message.userID 
-              where groupID = ? AND messageID > ?
+              where groupID = ? AND messageID < ?
               ORDER BY message.create_at 
               DESC LIMIT 12`,
               [groupid, lastID]
@@ -168,3 +168,4 @@ exports.createGroup = createGroup;
 exports.sendMessage = sendMessage;
 exports.getMessages = getMessages;
 exports.getChats = getChats;
+exports.checkToken = checkToken;
