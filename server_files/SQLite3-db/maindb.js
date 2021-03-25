@@ -22,19 +22,25 @@ function main() {
   //   console.log(val);
   // })
 
-  //group.createGroup([3, 2])
+  // var p = new Promise((res, rej) => {
+  //   group.createGroup('3d29a69aaa10782fc5096cc16179d358bd73b74b', 2, [1, 2], res)
+  // });
+  // p.then((val) => {
+  //   console.log(val);
+  // })
+  
   // for(var x = 0; x < 15; x++){
   //   group.sendMessage('c1d697353d5f09424b3a280f79afec88ce6e790c', 2, 2 , x + ' message')
   // }
   //group.sendMessage('493f4edaa8b8301eb3b2bb6ec383cc4e5529a52a', 2, 2 , 'hey guy')
-  //group.sendMessage('d08ccc61e240b8a7f6215798632aed45b566628c', 3, 3 , 'hey gu3432y')
+  //group.sendMessage('d08ccc61e240b8a7f6215798632aed45b566628c', 3, 2, 'hey gu3432ssssssy')
   //group.getChats(2, 'c1d697353d5f09424b3a280f79afec88ce6e790c')
-  group.getMessages(2, 2, 'c1d697353d5f09424b3a280f79afec88ce6e790c', 12)
-  //group.sendMessage('5a15621f668c44066f9b45729876a42d0b168088', 2, 12 , 'hey guy')
-  //dao.run(``, []).then((r) => {console.log(r)})
-  // dao.all(`SELECT * FROM login`, []).then((r) => {
-  //   console.log(r);
-  // });
+  //group.getMessages(2, 2, 'c1d697353d5f09424b3a280f79afec88ce6e790c', 12)
+  //group.sendMessage('c726dc82e3c2e705ad1dbe1b28caff5c774efc06', 2, 2, 'tester fly!!!!!')
+  // dao.run(``, []).then((r) => {console.log(r)})
+  dao.all(`SELECT * FROM login`, []).then((r) => {
+    console.log(r);
+  });
   //group.sendMessage("7c517deff4aa7f3eaf4f9c155dbea86a6ca33824", 1, 1, "hello");
 }
 main();

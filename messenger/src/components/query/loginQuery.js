@@ -23,12 +23,12 @@ export const signUpQuery = (
 };
 
 const querySignIn = (username, password, setLogIn, makeNotification) => {
-  const sign =  new Promise((res, rej) => {
+  const sign = new Promise((res, rej) => {
     sendLogin("/login/", res, {
       username: username,
       password: password,
     });
-  })
+  });
   sign.then((res) => {
     if (res.success === 1) {
       setLogIn(res.userID, res.token, res.username);
@@ -40,13 +40,13 @@ const querySignIn = (username, password, setLogIn, makeNotification) => {
 };
 
 const querySignUp = (username, password1, password2, makeNotification) => {
-  const sign =  new Promise((res, rej) => {
+  const sign = new Promise((res, rej) => {
     sendLogin("/signup/", res, {
       username: username,
       password1: password1,
       password2: password2,
-    })
-  })
+    });
+  });
   sign.then((res) => {
     if (res.success === 1) {
       makeNotification(res.response);

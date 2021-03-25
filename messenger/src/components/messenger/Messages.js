@@ -11,7 +11,7 @@ const Messages = ({ darkMode, height, messages = null }) => {
             message={{
               time: message.time,
               message: message.message,
-              name: message.name,
+              name: message.userName,
               right: message.right,
             }}
           />
@@ -25,6 +25,7 @@ const Messages = ({ darkMode, height, messages = null }) => {
             fontSize: "1.5rem",
             transform: "translate(-50%, -50%)",
             textAlign: "center",
+            zIndex: 3,
           }}
           className={darkMode ? "text3-D" : "text3-L"}
         >

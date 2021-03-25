@@ -277,6 +277,36 @@
   background-image: url(../image/pixelplane.jpg);
 }
 
+#card3 {
+  background-image: url(../image/messenger.png);
+}
+
+#blur3 {
+  background-image: url(../image/messenger.png);
+}
+
+.icons {
+  position: fixed;
+  right: 5px;
+  top: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  z-index: 15;
+}
+
+.icons img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 15px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

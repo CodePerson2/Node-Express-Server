@@ -3,7 +3,7 @@ import React from "react";
 import "./style/index.css";
 import Messenger from "./components/messenger/Messenger";
 import Login from "./components/login/Login";
-import { getFriends } from "./components/query/messengerQuery";
+import { getFriends, getSearch } from "./components/query/messengerQuery";
 import Notification from "./components/notification/Notification";
 
 function App() {
@@ -42,12 +42,12 @@ function App() {
   const toggleFriend = async (id) => {
     setFriends(
       friends.map((friend) =>
-        friend.id === id
+        friend.groupID === id
           ? { ...friend, highlight: true }
           : { ...friend, highlight: false }
       )
     );
-    friends.forEach((e) => (e.id === id ? openMessage(e) : e));
+    friends.forEach((e) => (e.groupID === id ? openMessage(e) : e));
     setAppLocation(true);
   };
 
@@ -56,11 +56,7 @@ function App() {
   };
 
   const openMessage = (friend) => {
-    setName(friend.name);
-  };
-
-  const search = (val) => {
-    console.log(val);
+    setName(friend.userName);
   };
 
   const colorMode = () => {
@@ -73,8 +69,32 @@ function App() {
     });
     friends.then((res) => {
       if (res === undefined) setFriends([]);
-      else setFriends(res);
-      console.log(res);
+      else if (res.success === 0) {
+        makeNotification(res.res);
+      } else {
+        res.forEach((f) => (f.highlight = false));
+        setFriends(res);
+      }
+    });
+  };
+
+  const returnSearch = (search, setSearchResults) => {
+    if (search.length === 0) {
+      setSearchResults([]);
+      return;
+    }
+    var friends = new Promise((res, rej) => {
+      getSearch(res, userid, token, search);
+    });
+    friends.then((res) => {
+      if (res.success === 1) {
+        setSearchResults(res["users"]);
+      } else if (res.success === 0 && res.error === 0) {
+        setSearchResults([]);
+      } else if (res.error === 1) {
+        setSearchResults([]);
+        makeNotification(res.response);
+      }
     });
   };
 
@@ -82,7 +102,7 @@ function App() {
     setUsername(user);
     setToken(token);
     setUserid(id);
-    console.log(user + " " + token + " " + id);
+    setFriends([]);
 
     if (!loggedIn) {
       returnFriends(id, token);
@@ -122,8 +142,9 @@ function App() {
         appWidth={appWidth}
         friends={friends}
         onToggle={toggleFriend}
-        onSearch={search}
         name={name}
+        userInfo={{ userName: username, userID: userid, token: token }}
+        returnSearch={returnSearch}
       />
       <Login
         setLogIn={changeLoggedIn}

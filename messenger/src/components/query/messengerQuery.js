@@ -7,7 +7,13 @@ const messages = [
     time: "234234",
     right: false,
   },
-  { id: 3, message: "Not much honestly", name: "bob", time: "212893", right: true },
+  {
+    id: 3,
+    message: "Not much honestly",
+    name: "bob",
+    time: "212893",
+    right: true,
+  },
   {
     id: 4,
     message: "Coolio",
@@ -15,8 +21,20 @@ const messages = [
     time: "234234",
     right: false,
   },
-  { id: 5, message: "Hard to find filler", name: "bob", time: "212893", right: true },
-  { id: 6, message: "I know what do people talk about", name: "bob", time: "212893", right: true },
+  {
+    id: 5,
+    message: "Hard to find filler",
+    name: "bob",
+    time: "212893",
+    right: true,
+  },
+  {
+    id: 6,
+    message: "I know what do people talk about",
+    name: "bob",
+    time: "212893",
+    right: true,
+  },
   { id: 7, message: "IDk :)", name: "bob", time: "212893", right: true },
 ];
 
@@ -72,15 +90,30 @@ const friends = [
 ];
 
 //querys database for messages
-export const getMessages = () => {
-  return messages;
+export const getMessages = (
+  res,
+  id,
+  token,
+  groupID,
+  lastMessDate = "2031-03-22 16:31:32"
+) => {
+  return query(res, "/getMessages/", {
+    token: token,
+    userID: id,
+    groupID: groupID,
+    lastMessDate: lastMessDate,
+  });
 };
 
 export const getFriends = (res, id, token) => {
-  return queryFriends(res, '/getFriends/', {token: token, userID: id});
+  return query(res, "/getFriends/", { token: token, userID: id });
 };
 
-function queryFriends(res, queryLocation, info) {
+export const getSearch = (res, userID, token, search) => {
+  return query(res, '/getSearch/', {userID: userID, token: token, search: search})
+}
+
+function query(res, queryLocation, info) {
   var xhttp;
   var loc = queryLocation;
   info = JSON.stringify(info);
@@ -92,8 +125,6 @@ function queryFriends(res, queryLocation, info) {
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       var resp = JSON.parse(this.responseText);
-      console.log(resp)
-      console.log("here")
       res(resp);
     }
   };

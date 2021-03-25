@@ -5,6 +5,7 @@ import { getMessages } from "../query/messengerQuery";
 const appWidthLimit = 700;
 
 const Messenger = ({
+  userInfo,
   setLogIn,
   colorMode,
   darkMode,
@@ -13,19 +14,37 @@ const Messenger = ({
   appLocation,
   friends,
   onToggle,
-  onSearch,
   name,
   loggedIn,
+  returnSearch,
 }) => {
   const [messages, setMessages] = useState(null);
 
-  const returnMessagesOnClick = () => {
-    var mess = getMessages();
-    setMessages(mess);
+  //Add messages to message box
+  const returnMessagesOnClick = (groupID, lastMessageDate = 0) => {
+    var mess = new Promise((res, rej) => {
+      getMessages(res, userInfo.userID, userInfo.token, groupID);
+    });
+    mess.then((res) => {
+      if (res === undefined) setMessages([]);
+      else if (res.success === 0) {
+        setMessages([]);
+      } else {
+        res.forEach((e) => {
+          e.right = false;
+        });
+        res.forEach((e) =>
+          e.userName === userInfo.userName
+            ? (e.right = true)
+            : (e.right = false)
+        );
+        setMessages(res);
+      }
+    });
   };
 
   return (
-    <div style={{opacity: loggedIn? '1' : '0'}}>
+    <div style={{ opacity: loggedIn ? "1" : "0" }}>
       <SideBar
         colorMode={colorMode}
         darkMode={darkMode}
@@ -33,9 +52,10 @@ const Messenger = ({
         visible={loggedIn && (appWidth >= appWidthLimit || !appLocation)}
         friends={friends}
         onToggle={onToggle}
-        onSearch={onSearch}
+        userInfo={userInfo}
         setLogIn={setLogIn}
         getMessages={returnMessagesOnClick}
+        returnSearch={returnSearch}
       />
       <MessageBox
         darkMode={darkMode}

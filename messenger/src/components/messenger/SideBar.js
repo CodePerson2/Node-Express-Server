@@ -5,15 +5,16 @@ import { useState } from "react";
 import { FaCogs, FaArrowCircleLeft } from "react-icons/fa";
 
 const SideBar = ({
+  userInfo,
   colorMode,
   darkMode,
   smallApp,
   visible,
   friends,
   onToggle,
-  onSearch,
   setLogIn,
   getMessages,
+  returnSearch,
 }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -45,12 +46,16 @@ const SideBar = ({
         >
           Messenger
         </div>
-        <SearchBar darkMode={darkMode} onSearch={onSearch} />
+        <SearchBar
+          userInfo={userInfo}
+          darkMode={darkMode}
+          returnSearch={returnSearch}
+        />
         <div className="App-SideBar-Boxes">
           {friends !== null && friends.length > 0 ? (
             friends.map((friend) => (
               <FriendBox
-                key={friend.id}
+                key={friend.groupID}
                 friend={friend}
                 onToggle={onToggle}
                 darkMode={darkMode}

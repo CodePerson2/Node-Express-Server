@@ -1,5 +1,6 @@
-const group = require("./account");
+const account = require("./account");
 const login = require("./login");
+const search = require("./search")
 
 function recieve(app) {
   app.post("/login/", (req, res) => {
@@ -20,7 +21,7 @@ function recieve(app) {
 
   app.post("/getFriends/", (req, res) => {
     var info = req.body;
-    group.getChats(info.userID, info.token).then((resp) => {
+    account.getChats(info.userID, info.token).then((resp) => {
       res.send(resp);
     });
   });
@@ -28,14 +29,47 @@ function recieve(app) {
   app.post("/getSearch/", (req, res) => {
     var info = req.body;
     var srch = new Promise((res, rej) => {
-      search.getSearch(
+      search.getSearch(info.userID, info.token, info.search, res);
+    });
+    srch.then((val) => {
+      res.send(val);
+    });
+    srch.catch((rej) => {
+      console.log(rej)
+    })
+  });
+
+  app.post("/addGroup/", (req, res) => {
+    var info = req.body;
+    var grp = new Promise((res, rej) => {
+      account.createGroup(info.userID, info.token, info.usernames, res);
+    });
+    grp.then((val) => {
+      res.send(val);
+    });
+  });
+
+  app.post("/getMessages/", (req, res) => {
+    var info = req.body;
+    account
+      .getMessages(info.groupID, info.userID, info.token, info.lastMessDate)
+      .then((val) => {
+        res.send(val);
+      });
+  });
+
+  app.post("/sendMessage/", (req, res) => {
+    var info = req.body;
+    var grp = new Promise((res, rej) => {
+      account.sendMessage(
+        info.groupID,
         info.userID,
         info.token,
-        info.search,
+        info.message,
         res
       );
     });
-    srch.then((val) => {
+    grp.then((val) => {
       res.send(val);
     });
   });

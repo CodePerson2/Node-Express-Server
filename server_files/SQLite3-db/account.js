@@ -5,18 +5,28 @@ const Promise = require("bluebird");
 const tokenMax = 20;
 const database = "./database.sqlite3";
 
-function createGroup(usernames) {
+function createGroup(userid, token, usernames, resp) {
   const dao = new AppDAO(database);
 
-  dao.run(`INSERT INTO chatGroup (name) VALUES (?)`, []).then((val) => {
-    dao.get(`SELECT last_insert_rowid()`).then((val) => {
-      usernames.forEach((element) => {
-        dao.run(`INSERT INTO userChat (groupID, userID) VALUES (?, ?) `, [
-          val[`last_insert_rowid()`],
-          element,
-        ]);
+  var tok = checkToken(token, userid, dao);
+  tok.then(() => {
+    dao.run(`INSERT INTO chatGroup (name) VALUES (?)`, []).then((val) => {
+      dao.get(`SELECT last_insert_rowid()`).then((val) => {
+        var items = 0;
+        usernames.forEach((element) => {
+          items++;
+          dao.run(`INSERT INTO userChat (groupID, userID) VALUES (?, ?) `, [
+            val[`last_insert_rowid()`],
+            element,
+          ]);
+          if (items === usernames.length)
+            resp({ success: 1, response: "Group Created Successfully" });
+        });
       });
     });
+  });
+  tok.catch((val) => {
+    resp(val);
   });
 }
 
@@ -36,28 +46,30 @@ function sendMessage(token, userid, groupid, message) {
   });
 }
 
-function getMessages(groupid, userid, token, lastID = 0) {
+function getMessages(groupid, userid, token, lastDate = "2031-03-22 16:31:32") {
   const dao = new AppDAO(database);
-  checkToken(token, userid, dao).then((tok) => {
-    if (tok) {
-      checkUserInGroup(dao, userid, groupid).then((val) => {
-        if (val) {
-          dao
-            .all(
-              `SELECT message.message, message.create_at, login.userName, message.messageId 
-              FROM message 
-              INNER JOIN login ON login.userID = message.userID 
-              where groupID = ? AND messageID < ?
-              ORDER BY message.create_at 
-              DESC LIMIT 12`,
-              [groupid, lastID]
-            )
-            .then((row) => {
-              console.log(row);
-            });
-        }
-      });
-    }
+  return new Promise((res, rej) => {
+    checkToken(token, userid, dao).then((tok) => {
+      if (tok) {
+        checkUserInGroup(dao, userid, groupid).then((val) => {
+          if (val) {
+            dao
+              .all(
+                `SELECT message.message, message.create_at as time, login.userName
+                FROM message 
+                INNER JOIN login ON login.userID = message.userID 
+                where groupID = ? AND message.create_at < ?
+                ORDER BY message.create_at 
+                DESC LIMIT 12`,
+                [groupid, lastDate]
+              )
+              .then((row) => {
+                res(row);
+              });
+          }
+        });
+      }
+    });
   });
 }
 
@@ -65,13 +77,13 @@ function getChats(userid, token) {
   const dao = new AppDAO(database);
 
   return new Promise((res, rej) => {
-    var tokenRes = checkToken(token, userid, dao, res)
+    var tokenRes = checkToken(token, userid, dao, res);
     tokenRes.then((tok) => {
       if (tok) {
         dao
           .all(
-            `SELECT grp.groupID, grp.groupName, mess.message, mess.sender, mess.messDate
-            FROM (SELECT chat.groupID as groupID, chat.groupName as groupName
+            `SELECT grp.groupID, grp.groupName, mess.message, grp.userName, mess.messDate, mess.userName as sender
+            FROM (SELECT chat.groupID as groupID, chat.groupName as groupName, log.userName as userName
             FROM userChat
             INNER JOIN 
               (SELECT userChat.groupID as groupID, chatGroup.name as groupName
@@ -88,10 +100,11 @@ function getChats(userid, token) {
 
               LEFT JOIN
 
-              (SELECT x.message, x.groupID, x.sender, x.messDate FROM 
+              (SELECT x.message, x.groupID, x.messDate, x.userName FROM 
               (SELECT grp.groupID as groupID, message.message as message,
-                message.userID as sender, message.create_at as messDate
+               lgn.userName as userName, message.create_at as messDate
               FROM message
+
               INNER JOIN 
                 (SELECT userChat.groupID AS groupID
                 FROM login 
@@ -100,10 +113,18 @@ function getChats(userid, token) {
                 GROUP BY login.userID, userChat.groupID) 
               AS grp
               ON grp.groupID = message.groupID
+
+              INNER JOIN 
+                (SELECT userName, userID 
+                FROM login)
+              AS lgn
+              ON lgn.userID = message.userID
+
               ORDER BY message.create_at DESC) 
             as x
             GROUP BY x.groupID) AS mess
             ON mess.groupID = grp.groupID
+            ORDER BY mess.messDate DESC
             `,
             [userid, userid, userid]
           )
@@ -111,12 +132,11 @@ function getChats(userid, token) {
             if (row.length === 0) res({ success: 0, rows: 0, res: "No Chats" });
             res(row);
           });
-        
       }
     });
     tokenRes.catch((val) => {
-      res(val)
-    })
+      res(val);
+    });
   });
 }
 
@@ -133,7 +153,6 @@ function checkUserInGroup(dao, userid, groupid) {
           //tell user they are not in group discussed
           rej(false);
         } else {
-          console.log(`user and group found`);
           res(true);
         }
       });
@@ -152,10 +171,10 @@ function checkToken(token, userid, dao) {
       .then((val) => {
         if (val === undefined) {
           //tell user token is corrupt login again
-          rej({success: 0, res: "Token is Corrupt"})
+          rej({ success: 0, res: "Token is Corrupt" });
         } else if (val.time / 60 > tokenMax) {
           //Tell user to login again
-          rej({success: 0, res: "Token is Out of Date"});
+          rej({ success: 0, res: "Token is Out of Date" });
         } else {
           login.refreshTokenDate(dao, userid);
           res(true);
