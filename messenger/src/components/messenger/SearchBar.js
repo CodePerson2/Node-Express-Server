@@ -1,17 +1,17 @@
 import { useState } from "react";
 import SearchResults from "./SearchResults";
 
-const SearchBar = ({ userInfo, darkMode, returnSearch }) => {
+const SearchBar = ({ userInfo, darkMode, returnSearch, makeGroup, searchResults }) => {
   const [searchVal, setSearchVal] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  
 
   const onInput = (e) => {
     setSearchVal(e.target.value);
-    returnSearch(e.target.value, setSearchResults);
+    returnSearch(e.target.value);
   };
 
   const addUser = (id) => {
-    console.log(id);
+    makeGroup(id)
   };
 
   return (

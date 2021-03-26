@@ -12,7 +12,12 @@ const Message = ({ darkMode, message }) => {
         className={`App-MessageBox-Messages-Message-Time ${
           darkMode ? "text2-D" : "text2-L"
         }`}
-        style={{ display: show ? "block" : "none" }}
+        style={{
+          visibility: show ? "visible" : "hidden",
+          opacity: show ? "1" : "0",
+          height: show ? "auto" : "0px",
+          marginRight: show ? "15px" : "30px",
+        }}
       >
         {message.time}
       </div>
@@ -25,9 +30,7 @@ const Message = ({ darkMode, message }) => {
               ? "bubble-G-D"
               : "bubble-G-L"
           }`}
-          onClick={() => (
-              setShow(!show)
-          )}
+          onClick={() => setShow(!show)}
         >
           {message.message}
         </div>
@@ -36,7 +39,13 @@ const Message = ({ darkMode, message }) => {
         className={`App-MessageBox-Messages-Message-Name ${
           message.right ? "text3-D" : "text3-L"
         }`}
-        style={{ display: show ? "block" : "none" }}
+        style={{
+          visibility: show ? "visible" : "hidden",
+          opacity: show ? "1" : "0",
+          height: show ? "auto" : "0px",
+          marginRight: show ? "15px" : "30px",
+          marginLeft: show ? "15px" : "30px",
+        }}
       >
         {message.name}
       </div>

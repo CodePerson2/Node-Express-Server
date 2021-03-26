@@ -3,7 +3,7 @@ import React from "react";
 import "./style/index.css";
 import Messenger from "./components/messenger/Messenger";
 import Login from "./components/login/Login";
-import { getFriends, getSearch } from "./components/query/messengerQuery";
+import { getFriends, getSearch, addGroup, getMessages } from "./components/query/messengerQuery";
 import Notification from "./components/notification/Notification";
 
 function App() {
@@ -23,6 +23,8 @@ function App() {
   const [notifState, setNotifState] = useState(false);
 
   const [friends, setFriends] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const [messages, setMessages] = useState(null);
 
   const App = useRef(null);
 
@@ -78,7 +80,7 @@ function App() {
     });
   };
 
-  const returnSearch = (search, setSearchResults) => {
+  const returnSearch = (search) => {
     if (search.length === 0) {
       setSearchResults([]);
       return;
@@ -98,11 +100,52 @@ function App() {
     });
   };
 
+  const makeGroup = (friendID) => {
+    var add = new Promise((res, rej) => {
+      addGroup(res, userid, token, friendID);
+    });
+    add.then((res) => {
+      if (res.success === 1) {
+        makeNotification(res.response)
+        returnFriends(userid, token)
+      } else if (res.success === 0 && res.error === 0) {
+        makeNotification(res.response);
+      } else if (res.error === 1) {
+        makeNotification(res.response);
+      }
+    });
+  }
+
+  //Add messages to message box
+  const returnMessagesOnClick = (groupID, lastMessageDate = 0) => {
+    var mess = new Promise((res, rej) => {
+      getMessages(res, userid, token, groupID);
+    });
+    mess.then((res) => {
+      if (res === undefined) setMessages([]);
+      else if (res.success === 0) {
+        setMessages([]);
+      } else {
+        res.forEach((e) => {
+          e.right = false;
+        });
+        res.forEach((e) =>
+          e.userName === username
+            ? (e.right = true)
+            : (e.right = false)
+        );
+        setMessages(res);
+      }
+    });
+  };
+
   const changeLoggedIn = (id = 0, token = "", user = "") => {
     setUsername(user);
     setToken(token);
     setUserid(id);
     setFriends([]);
+    setSearchResults([]);
+    setMessages([]);
 
     if (!loggedIn) {
       returnFriends(id, token);
@@ -145,6 +188,10 @@ function App() {
         name={name}
         userInfo={{ userName: username, userID: userid, token: token }}
         returnSearch={returnSearch}
+        makeGroup={makeGroup}
+        searchResults={searchResults}
+        getMessages={returnMessagesOnClick}
+        messages={messages}
       />
       <Login
         setLogIn={changeLoggedIn}

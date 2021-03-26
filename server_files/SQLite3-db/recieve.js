@@ -42,7 +42,7 @@ function recieve(app) {
   app.post("/addGroup/", (req, res) => {
     var info = req.body;
     var grp = new Promise((res, rej) => {
-      account.createGroup(info.userID, info.token, info.usernames, res);
+      account.createGroup(info.userID, info.token, [info.userID, info.friendID], res);
     });
     grp.then((val) => {
       res.send(val);

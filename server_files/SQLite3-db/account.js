@@ -5,7 +5,7 @@ const Promise = require("bluebird");
 const tokenMax = 20;
 const database = "./database.sqlite3";
 
-function createGroup(userid, token, usernames, resp) {
+function createGroup(userid, token, userIDs, resp) {
   const dao = new AppDAO(database);
 
   var tok = checkToken(token, userid, dao);
@@ -13,13 +13,13 @@ function createGroup(userid, token, usernames, resp) {
     dao.run(`INSERT INTO chatGroup (name) VALUES (?)`, []).then((val) => {
       dao.get(`SELECT last_insert_rowid()`).then((val) => {
         var items = 0;
-        usernames.forEach((element) => {
+        userIDs.forEach((element) => {
           items++;
           dao.run(`INSERT INTO userChat (groupID, userID) VALUES (?, ?) `, [
             val[`last_insert_rowid()`],
             element,
           ]);
-          if (items === usernames.length)
+          if (items === userIDs.length)
             resp({ success: 1, response: "Group Created Successfully" });
         });
       });

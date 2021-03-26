@@ -15,6 +15,8 @@ const SideBar = ({
   setLogIn,
   getMessages,
   returnSearch,
+  makeGroup,
+  searchResults,
 }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -50,6 +52,8 @@ const SideBar = ({
           userInfo={userInfo}
           darkMode={darkMode}
           returnSearch={returnSearch}
+          makeGroup={makeGroup}
+          searchResults={searchResults}
         />
         <div className="App-SideBar-Boxes">
           {friends !== null && friends.length > 0 ? (

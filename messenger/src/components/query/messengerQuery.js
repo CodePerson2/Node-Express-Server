@@ -113,6 +113,10 @@ export const getSearch = (res, userID, token, search) => {
   return query(res, '/getSearch/', {userID: userID, token: token, search: search})
 }
 
+export const addGroup = (res, userID, token, friendID) => {
+  return query(res, '/addGroup/', {userID: userID, token: token, friendID: friendID})
+}
+
 function query(res, queryLocation, info) {
   var xhttp;
   var loc = queryLocation;

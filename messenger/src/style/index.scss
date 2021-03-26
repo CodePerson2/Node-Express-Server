@@ -281,8 +281,9 @@ body {
         text-align: left;
 
         &-Bub {
-          margin: 3px 0;
-          padding-right: 10px;
+          margin: 3px 10px;
+          
+
           &-Text {
             word-break: break-all;
             border-radius: 15px;
@@ -295,6 +296,7 @@ body {
             margin: 0 5px;
             text-align: left;
             cursor: pointer;
+            transition: all 0.3s ease-in-out;
           }
         }
 
@@ -304,12 +306,14 @@ body {
           text-align: center;
           font-size: 0.8rem;
           color: $text-main;
+          transition: all 0.3s ease-in-out;
         }
 
         &-Name {
           font-size: 0.7rem;
           color: $text-subtle;
           margin: 0 15px;
+          transition: all 0.3s ease-in-out;
         }
       }
     }
