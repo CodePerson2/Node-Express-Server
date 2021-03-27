@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import Messages from "./Messages";
 
-const MessagesBox = ({ messages, darkMode, back, smallApp, visible, name }) => {
+const MessagesBox = ({ sendMessageOnClick, messages, darkMode, back, smallApp, visible, name }) => {
   const [timer, setTimer] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const [message, setMessage] = useState("");
@@ -123,7 +123,7 @@ const MessagesBox = ({ messages, darkMode, back, smallApp, visible, name }) => {
           ref={messageBox}
           readOnly
         />
-        <button onClick={() => null}>Send</button>
+        <button onClick={() => sendMessageOnClick(message, setMessage, setSendInputCont)}>Send</button>
       </div>
     </div>
   );

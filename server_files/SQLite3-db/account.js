@@ -30,7 +30,7 @@ function createGroup(userid, token, userIDs, resp) {
   });
 }
 
-function sendMessage(token, userid, groupid, message) {
+function sendMessage(token, userid, groupid, message, res) {
   const dao = new AppDAO(database);
   checkToken(token, userid, dao).then((tok) => {
     if (tok) {
@@ -39,7 +39,9 @@ function sendMessage(token, userid, groupid, message) {
           dao.run(
             `INSERT INTO message (userid, groupid, message) VALUES (?, ?, ?)`,
             [userid, groupid, message]
-          );
+          ).then(() => {
+            res({success: 1, resp: "message sent"})
+          })
         }
       });
     }
@@ -55,12 +57,15 @@ function getMessages(groupid, userid, token, lastDate = "2031-03-22 16:31:32") {
           if (val) {
             dao
               .all(
-                `SELECT message.message, message.create_at as time, login.userName
-                FROM message 
-                INNER JOIN login ON login.userID = message.userID 
-                where groupID = ? AND message.create_at < ?
-                ORDER BY message.create_at 
-                DESC LIMIT 12`,
+                `SELECT * 
+                FROM (SELECT message.message, message.create_at as time, login.userName
+                    FROM message 
+                    INNER JOIN login ON login.userID = message.userID 
+                    where groupID = ? AND message.create_at < ?
+                    ORDER BY message.create_at 
+                    DESC LIMIT 12)
+                  ORDER BY time 
+                  ASC `,
                 [groupid, lastDate]
               )
               .then((row) => {

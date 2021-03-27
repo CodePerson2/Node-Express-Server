@@ -1,6 +1,6 @@
 const account = require("./account");
 const login = require("./login");
-const search = require("./search")
+const search = require("./search");
 
 function recieve(app) {
   app.post("/login/", (req, res) => {
@@ -35,14 +35,19 @@ function recieve(app) {
       res.send(val);
     });
     srch.catch((rej) => {
-      console.log(rej)
-    })
+      console.log(rej);
+    });
   });
 
   app.post("/addGroup/", (req, res) => {
     var info = req.body;
     var grp = new Promise((res, rej) => {
-      account.createGroup(info.userID, info.token, [info.userID, info.friendID], res);
+      account.createGroup(
+        info.userID,
+        info.token,
+        [info.userID, info.friendID],
+        res
+      );
     });
     grp.then((val) => {
       res.send(val);
@@ -62,9 +67,9 @@ function recieve(app) {
     var info = req.body;
     var grp = new Promise((res, rej) => {
       account.sendMessage(
-        info.groupID,
-        info.userID,
         info.token,
+        info.userID,
+        info.groupID,
         info.message,
         res
       );

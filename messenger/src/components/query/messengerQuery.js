@@ -110,12 +110,29 @@ export const getFriends = (res, id, token) => {
 };
 
 export const getSearch = (res, userID, token, search) => {
-  return query(res, '/getSearch/', {userID: userID, token: token, search: search})
-}
+  return query(res, "/getSearch/", {
+    userID: userID,
+    token: token,
+    search: search,
+  });
+};
 
 export const addGroup = (res, userID, token, friendID) => {
-  return query(res, '/addGroup/', {userID: userID, token: token, friendID: friendID})
-}
+  return query(res, "/addGroup/", {
+    userID: userID,
+    token: token,
+    friendID: friendID,
+  });
+};
+
+export const sendMessage = (res, userID, token, groupID, message) => {
+  return query(res, "/sendMessage/", {
+    userID: userID,
+    token: token,
+    groupID: groupID,
+    message: message,
+  });
+};
 
 function query(res, queryLocation, info) {
   var xhttp;

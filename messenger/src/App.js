@@ -3,7 +3,13 @@ import React from "react";
 import "./style/index.css";
 import Messenger from "./components/messenger/Messenger";
 import Login from "./components/login/Login";
-import { getFriends, getSearch, addGroup, getMessages } from "./components/query/messengerQuery";
+import {
+  getFriends,
+  getSearch,
+  addGroup,
+  getMessages,
+  sendMessage,
+} from "./components/query/messengerQuery";
 import Notification from "./components/notification/Notification";
 
 function App() {
@@ -12,6 +18,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [token, setToken] = useState("");
   const [userid, setUserid] = useState(0);
+  const [currentGroupID, setCurrentGroupID] = useState(null);
 
   const [appWidth, setAppWidth] = useState(0);
   const [appLocation, setAppLocation] = useState(false);
@@ -42,6 +49,7 @@ function App() {
   };
 
   const toggleFriend = async (id) => {
+    setCurrentGroupID(id);
     setFriends(
       friends.map((friend) =>
         friend.groupID === id
@@ -106,15 +114,15 @@ function App() {
     });
     add.then((res) => {
       if (res.success === 1) {
-        makeNotification(res.response)
-        returnFriends(userid, token)
+        makeNotification(res.response);
+        returnFriends(userid, token);
       } else if (res.success === 0 && res.error === 0) {
         makeNotification(res.response);
       } else if (res.error === 1) {
         makeNotification(res.response);
       }
     });
-  }
+  };
 
   //Add messages to message box
   const returnMessagesOnClick = (groupID, lastMessageDate = 0) => {
@@ -130,11 +138,28 @@ function App() {
           e.right = false;
         });
         res.forEach((e) =>
-          e.userName === username
-            ? (e.right = true)
-            : (e.right = false)
+          e.userName === username ? (e.right = true) : (e.right = false)
         );
         setMessages(res);
+      }
+    });
+  };
+
+  const sendMessageOnClick = (message, setMessage, setSendInputCont) => {
+    var mess = new Promise((res, rej) => {
+      sendMessage(res, userid, token, currentGroupID, message);
+    });
+    mess.then((res) => {
+      if (res.success === 1) {
+        messages.push({
+          userName: username,
+          message: message,
+          time: Date.now(),
+          right: true,
+        });
+        setMessages(messages);
+        setMessage("");
+        setSendInputCont(28);
       }
     });
   };
@@ -192,6 +217,7 @@ function App() {
         searchResults={searchResults}
         getMessages={returnMessagesOnClick}
         messages={messages}
+        sendMessageOnClick={sendMessageOnClick}
       />
       <Login
         setLogIn={changeLoggedIn}

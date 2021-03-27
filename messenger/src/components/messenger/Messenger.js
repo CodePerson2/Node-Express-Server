@@ -19,6 +19,7 @@ const Messenger = ({
   searchResults,
   messages,
   getMessages,
+  sendMessageOnClick,
 }) => {
   return (
     <div style={{ opacity: loggedIn ? "1" : "0" }}>
@@ -43,6 +44,7 @@ const Messenger = ({
         visible={loggedIn && (appWidth >= appWidthLimit || appLocation)}
         name={name}
         messages={messages}
+        sendMessageOnClick={sendMessageOnClick}
       />
     </div>
   );

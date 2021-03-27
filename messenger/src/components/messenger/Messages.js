@@ -6,7 +6,7 @@ const Messages = ({ darkMode, height, messages = null }) => {
       {messages !== null && Messages.length > 0 ? (
         messages.map((message) => (
           <Message
-            key={message.id}
+            key={message.time}
             darkMode={darkMode}
             message={{
               time: message.time,
